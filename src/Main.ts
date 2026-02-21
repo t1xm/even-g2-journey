@@ -1,90 +1,134 @@
 import { 
   waitForEvenAppBridge, 
   CreateStartUpPageContainer, 
-  TextContainerProperty, 
-  TextContainerUpgrade,
-  OsEventTypeList 
+  TextContainerProperty
 } from '@evenrealities/even_hub_sdk';
-import { calculateLoveTime } from './logic';
+import { calculateLoveStats } from './logic';
 
+// --- HTML Elemente laden ---
+const namesInput = document.getElementById('names-input') as HTMLInputElement;
+const dateInput = document.getElementById('date-input') as HTMLInputElement;
+const saveBtn = document.getElementById('save-btn') as HTMLButtonElement;
+const statusEl = document.getElementById('status') as HTMLDivElement;
+
+// --- Helper: Status Animation ---
+function showStatus(message: string, duration: number = 3000): void {
+  if (!statusEl) return;
+  statusEl.textContent = message;
+  statusEl.classList.add('visible');
+  setTimeout(() => {
+    statusEl.classList.remove('visible');
+  }, duration);
+}
+
+// --- App Start ---
 async function initApp() {
-    const bridge = await waitForEvenAppBridge();
+  const bridge = await waitForEvenAppBridge();
 
-    const namesInput = document.getElementById('names-input') as HTMLInputElement;
-    const dateInput = document.getElementById('date-input') as HTMLInputElement;
-    const saveBtn = document.getElementById('save-btn');
-    const statusDiv = document.getElementById('status');
+  const savedNames = await bridge.getLocalStorage('together_names');
+  const savedDate = await bridge.getLocalStorage('together_date');
 
-    const initialNames = await bridge.getLocalStorage("together_names") || "Tim & Sarah";
-    const initialDate = await bridge.getLocalStorage("together_date") || "2022-05-12";
-    
-    if (namesInput) namesInput.value = initialNames;
-    if (dateInput) dateInput.value = initialDate;
+  if (savedNames) namesInput.value = savedNames;
+  if (savedDate) dateInput.value = savedDate;
 
-    saveBtn?.addEventListener('click', async () => {
-        await bridge.setLocalStorage("together_names", namesInput.value);
-        await bridge.setLocalStorage("together_date", dateInput.value);
-        if (statusDiv) statusDiv.innerText = "Gespeichert! Bitte App auf Brille neu starten.";
-        
-        startGlassesUI(bridge, namesInput.value, dateInput.value);
-    });
+  const displayNames = savedNames || "Tim & Lilli";
+  const displayDate = savedDate || "2023-09-18";
 
-    startGlassesUI(bridge, initialNames, initialDate);
+  await startGlassesUI(bridge, displayNames, displayDate);
+
+  saveBtn?.addEventListener('click', async () => {
+    const names = namesInput.value.trim();
+    const date = dateInput.value;
+
+    if (!names || !date) {
+      showStatus('Bitte beide Felder ausfüllen');
+      return;
+    }
+
+    await bridge.setLocalStorage('together_names', names);
+    await bridge.setLocalStorage('together_date', date);
+
+    showStatus('Gespeichert & an G2 gesendet');
+    await startGlassesUI(bridge, names, date);
+  });
 }
 
+// --- Brillen Logik (Das 2-Box-Dashboard) ---
 async function startGlassesUI(bridge: any, names: string, date: string) {
-    let currentUnit: 'days' | 'months' | 'minutes' = 'days';
+  const stats = calculateLoveStats(date);
+  if (!stats.isValid) return;
 
-    // Container 1: Header (Namen)
-    const header = new TextContainerProperty({
-        containerID: 1,
-        containerName: "header",
-        xPosition: 0, yPosition: 30, width: 576, height: 40,
-        content: names,
-        borderColor: 0,
-    });
+  // --- Design Guidelines Even OS 2.0 ---
+  // Canvas Gesamtbreite: 576px
+  const margin = 20; // Äußerer Rand links/rechts (Card margin & spacing)
+  const gap = 16; // Abstand zwischen den Boxen
+  const boxRadius = 6; // Corner Radius: 6px
+  const boxBorder = 15; // Even-Grün
+  const boxBorderWidth = 2;
 
-    const counter = new TextContainerProperty({
-        containerID: 2,
-        containerName: "counter",
-        xPosition: 40, yPosition: 90, width: 496, height: 100,
-        content: calculateLoveTime(date, currentUnit),
-        borderColor: 15,
-        borderWidth: 2,
-        borderRdaius: 10,
-        isEventCapture: 1 
-    });
+  // Berechnung der Box-Breiten
+  const boxWidth = (576 - (margin * 2) - gap) / 2; // (576 - 40 - 16) / 2 = 260px pro Box
+  const xLeft = margin; // 20
+  const xRight = margin + boxWidth + gap; // 296
+  
+  const headerY = 16;
+  const boxesY = 60;
+  const boxesHeight = 180;
 
-    const footer = new TextContainerProperty({
-        containerID: 3,
-        containerName: "footer",
-        xPosition: 0, yPosition: 220, width: 576, height: 40,
-        content: `Seit ${date}`,
-        borderColor: 0,
-    });
+  // 1. Header Container
+  const header = new TextContainerProperty({
+    containerID: 1, 
+    containerName: "header",
+    xPosition: margin, 
+    yPosition: headerY, 
+    width: 536, 
+    height: 30,
+    content: `${names}  •  Seit: ${stats.formattedDate}`,
+    borderColor: 0,
+  });
 
-    const page = new CreateStartUpPageContainer({
-        containerTotalNum: 3,
-        textObject: [header, counter, footer]
-    });
+  // 2. Linke Box (Genaue Zeit)
+  const boxLeft = new TextContainerProperty({
+    containerID: 2, 
+    containerName: "boxLeft",
+    xPosition: xLeft, 
+    yPosition: boxesY, 
+    width: boxWidth, 
+    height: boxesHeight,
+    content: stats.leftBoxString, // Hier ist das simulierte Padding drin
+    borderColor: boxBorder, 
+    borderWidth: boxBorderWidth, 
+    borderRdaius: boxRadius, // Bewusster Typo aus dem SDK
+    isEventCapture: 1 // Verhindert Simulator-Warnungen bei Klicks
+  });
 
+  // 3. Rechte Box (Meilensteine)
+  const boxRight = new TextContainerProperty({
+    containerID: 3, 
+    containerName: "boxRight",
+    xPosition: xRight, 
+    yPosition: boxesY, 
+    width: boxWidth, 
+    height: boxesHeight,
+    content: stats.rightBoxString, // Hier ist das simulierte Padding drin
+    borderColor: boxBorder, 
+    borderWidth: boxBorderWidth, 
+    borderRdaius: boxRadius,
+  });
+
+  // Seite generieren und senden
+  const page = new CreateStartUpPageContainer({
+    containerTotalNum: 3,
+    textObject: [header, boxLeft, boxRight]
+  });
+
+  try {
     await bridge.createStartUpPageContainer(page);
-
-    bridge.onEvenHubEvent((event: any) => {
-        if (event.textEvent && (event.textEvent.eventType === OsEventTypeList.CLICK_EVENT || event.textEvent.eventType === undefined)) {
-            
-            if (currentUnit === 'days') currentUnit = 'months';
-            else if (currentUnit === 'months') currentUnit = 'minutes';
-            else currentUnit = 'days';
-
-            const upgrade = new TextContainerUpgrade({
-                containerID: 2,
-                containerName: "counter",
-                content: calculateLoveTime(date, currentUnit)
-            });
-            bridge.textContainerUpgrade(upgrade);
-        }
-    });
+    console.log("Erfolgreich an G2 / Simulator gesendet!");
+  } catch (error) {
+    console.error("Fehler beim Senden:", error);
+  }
 }
 
+// App starten
 initApp().catch(console.error);
