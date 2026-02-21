@@ -1,13 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Together</title>
-  <link rel="stylesheet" href="/src/styles.css">
+  <title>Together G2</title>
 </head>
 <body>
-  <div id="app"></div>
+
+  <div>
+    <h1>Together</h1>
+
+    <p class="subtitle">Settings</p>
+    <div class="card">
+      <p>Names</p>
+      <input type="text" id="names-input" placeholder="e.g. Tim & Lilli">
+
+      <p>Anniversary</p>
+      <input type="date" id="date-input">
+    </div>
+
+
+    <p class="subtitle">Over Together</p>
+    <div class="card"">
+      <p>A minimalist relationship tracker for Even Realities G2. Displays time spent with your partner in different formats on the glasses HUD. A glanceable way to celebrate milestones.</p>
+    </div>
+
+    
+
+    <button id="save-btn">Auf Brille speichern</button>
+    <div id="status"></div>
+  </div>
+
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
+
+
+<style>
+
+  body {
+    background-color: #EEEEEE;
+    color: #232323;
+    font-family: sans-serif;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0px;
+  }
+
+  p {
+    color: #232323;
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0px;
+  }
+
+  .card {
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    padding: 16px;
+  }
+
+  input {
+    width: 100%; 
+    box-sizing: border-box;
+    background-color: rgba(35, 35, 35, 0.08);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+
+  }
+
+  input::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+
+  input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+
+</style>
