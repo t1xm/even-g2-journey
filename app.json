@@ -1,0 +1,8 @@
+{
+    "package_id": "com.t1xm.even.together",
+    "version": "1.0.0",
+    "entrypoint": "index.html",
+    "permissions": {
+        "network": ["*"]
+    }
+}
