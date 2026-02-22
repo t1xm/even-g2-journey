@@ -1,14 +1,179 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Together G2</title>
+
+  <style>
+
+    body {
+      background-color: #EEEEEE;
+      color: #232323;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 400;
+      margin: 0px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      font-weight: 400;
+      margin: 16px 0px 8px 0px;
+    }
+
+    p {
+      color: #232323;
+      font-size: 15px;
+      font-weight: 300;
+      margin: 0px;
+    }
+
+    .p {
+      margin: 0px 0px 8px 0px;
+    }
+
+    .card {
+      background-color: #FFFFFF;
+      border-radius: 6px;
+      padding: 16px;
+    }
+
+    img {
+      width: 20px;
+      height: auto;
+    }
+
+    .info-card {
+      background-color: #FFFFFF;
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail .card {
+      flex: 1;
+      text-align: center;
+    }
+
+    .detail {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .layout {
+          display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input {
+      width: 100%; 
+      box-sizing: border-box;
+      background-color: rgba(35, 35, 35, 0.08);
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      padding: 12px;
+    }
+
+    input::-webkit-calendar-picker-indicator {
+      display: none;
+      -webkit-appearance: none;
+    }
+
+    input, button, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    .divider-small {
+      height: 8px;
+    }
+
+    .divider {
+      height: 16px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #FEF991;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+    }
+
+    #status {
+      position: fixed;
+      bottom: 32px; 
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background-color: #FEF991;
+      padding: 8px 16px;
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+      width: 80%;
+      text-align: center;
+    }
+
+    #status.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+  </style>
+
 </head>
 <body>
 
   <div>
-    <h1>Together</h1>
+    <div class="layout">
+      <img src="assets/ic-heart.svg" alt="Heart Icon">
+      <h1 id="ui-names">Lilli & Tim</h1>
+    </div>
+
+    <p class="subtitle">Together since</p>
+    <div class="info-card">
+      <img src="assets/ic-calendar.svg" alt="Calendar Icon" class="icon">
+      <p id="ui-date">18. Sep 2023</p>
+    </div>
+    
+    <div class="divider-small"></div>
+    
+    <div class="info-card">
+      <img src="assets/ic-time.svg" alt="Clock Icon" class="icon">
+      <p id="ui-exact">2 Years, 0 Months and 1 Day</p>
+    </div>
+
+    <p class="subtitle">In detail</p>
+    <div class="detail">
+      <div class="card">
+        <p id="ui-months">24 Months</p>
+      </div>
+      <div class="card">
+        <p id="ui-weeks">104 Weeks</p>
+      </div>
+    </div>
+    <div class="divider-small"></div>
+    <div class="detail">
+      <div class="card">
+        <p id="ui-days">730 Days</p>
+      </div>
+      <div class="card">
+        <p id="ui-hours">17520 Hours</p>
+      </div>
+    </div>    
 
     <p class="subtitle">Settings</p>
     <div class="card">
@@ -26,7 +191,7 @@
     <button id="save-btn">Save & Send to G2</button>
 
     <p class="subtitle">About Together</p>
-    <div class="card"">
+    <div class="card">
       <p>A minimalist relationship tracker for Even Realities G2. Displays time spent with your partner in different formats on the glasses HUD. A glanceable way to celebrate milestones.</p>
     </div>
 
@@ -36,102 +201,3 @@
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
-
-
-<style>
-
-  body {
-    background-color: #EEEEEE;
-    color: #232323;
-    font-family: sans-serif;
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: 400;
-    margin: 0px;
-  }
-
-  .subtitle {
-    font-size: 13px;
-    font-weight: 400;
-    margin: 16px 0px 8px 0px;
-  }
-
-  p {
-    color: #232323;
-    font-size: 15px;
-    font-weight: 300;
-    margin: 0px;
-  }
-
-  .p {
-    margin: 0px 0px 8px 0px;
-  }
-
-  .card {
-    background-color: #FFFFFF;
-    border-radius: 6px;
-    padding: 16px;
-  }
-
-  input {
-    width: 100%; 
-    box-sizing: border-box;
-    background-color: rgba(35, 35, 35, 0.08);
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    padding: 12px;
-  }
-
-  input::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
-  }
-
-  input, button, select, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-  }
-
-  .divider-small {
-    height: 8px;
-  }
-
-  .divider {
-    height: 16px;
-  }
-
-  button {
-    width: 100%;
-    background-color: #FEF991;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-  }
-
-  #status {
-    position: fixed;
-    bottom: 32px; 
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background-color: #FEF991;
-    padding: 8px 16px;
-    border-radius: 6px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-    opacity: 0;
-    pointer-events: none;
-    width: 80%;
-    text-align: center;
-  }
-
-  #status.visible {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-
-</style>

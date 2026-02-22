@@ -11,7 +11,15 @@ const dateInput = document.getElementById('date-input') as HTMLInputElement;
 const saveBtn = document.getElementById('save-btn') as HTMLButtonElement;
 const statusEl = document.getElementById('status') as HTMLDivElement;
 
-// --- Helper: Status Animation ---
+// Neue HTML Elemente für das Handy-Dashboard
+const uiNames = document.getElementById('ui-names') as HTMLHeadingElement;
+const uiDate = document.getElementById('ui-date') as HTMLParagraphElement;
+const uiExact = document.getElementById('ui-exact') as HTMLParagraphElement;
+const uiMonths = document.getElementById('ui-months') as HTMLParagraphElement;
+const uiWeeks = document.getElementById('ui-weeks') as HTMLParagraphElement;
+const uiDays = document.getElementById('ui-days') as HTMLParagraphElement;
+const uiHours = document.getElementById('ui-hours') as HTMLParagraphElement;
+
 function showStatus(message: string, duration: number = 3000): void {
   if (!statusEl) return;
   statusEl.textContent = message;
@@ -19,6 +27,30 @@ function showStatus(message: string, duration: number = 3000): void {
   setTimeout(() => {
     statusEl.classList.remove('visible');
   }, duration);
+}
+
+// --- Funktion: Aktualisiert das Dashboard auf dem Handy ---
+function updateWebUI(names: string, dateStr: string) {
+  if (uiNames) uiNames.textContent = names || "Tim & Lilli";
+  const stats = calculateLoveStats(dateStr);
+
+  if (!stats.isValid) {
+    if (uiDate) uiDate.textContent = "Please select a date";
+    if (uiExact) uiExact.textContent = "-";
+    if (uiMonths) uiMonths.textContent = "-";
+    if (uiWeeks) uiWeeks.textContent = "-";
+    if (uiDays) uiDays.textContent = "-";
+    if (uiHours) uiHours.textContent = "-";
+    return;
+  }
+
+  // Handy-Elemente mit berechneten Werten füllen
+  if (uiDate) uiDate.textContent = stats.formattedDate;
+  if (uiExact) uiExact.textContent = `${stats.years} Years, ${stats.months} Months and ${stats.days} Days`;
+  if (uiMonths) uiMonths.textContent = `${stats.totalMonths.toLocaleString('en-US')} Months`;
+  if (uiWeeks) uiWeeks.textContent = `${stats.totalWeeks.toLocaleString('en-US')} Weeks`;
+  if (uiDays) uiDays.textContent = `${stats.totalDays.toLocaleString('en-US')} Days`;
+  if (uiHours) uiHours.textContent = `${stats.totalHours.toLocaleString('en-US')} Hours`;
 }
 
 // --- App Start ---
@@ -34,48 +66,50 @@ async function initApp() {
   const displayNames = savedNames || "Tim & Lilli";
   const displayDate = savedDate || "2023-09-18";
 
+  // Initiale UI Updates
+  updateWebUI(displayNames, displayDate);
   await startGlassesUI(bridge, displayNames, displayDate);
 
+  // Speicher-Event
   saveBtn?.addEventListener('click', async () => {
     const names = namesInput.value.trim();
     const date = dateInput.value;
 
     if (!names || !date) {
-      showStatus('Bitte beide Felder ausfüllen');
+      showStatus('Please fill in both fields');
       return;
     }
 
     await bridge.setLocalStorage('together_names', names);
     await bridge.setLocalStorage('together_date', date);
 
-    showStatus('Gespeichert & an G2 gesendet');
+    showStatus('Saved & sent to G2');
+    
+    // Beide Plattformen (Handy + Brille) aktualisieren
+    updateWebUI(names, date);
     await startGlassesUI(bridge, names, date);
   });
 }
 
-// --- Brillen Logik (Das 2-Box-Dashboard) ---
+// --- Brillen Logik ---
 async function startGlassesUI(bridge: any, names: string, date: string) {
   const stats = calculateLoveStats(date);
   if (!stats.isValid) return;
 
-  // --- Design Guidelines Even OS 2.0 ---
-  // Canvas Gesamtbreite: 576px
-  const margin = 20; // Äußerer Rand links/rechts (Card margin & spacing)
-  const gap = 16; // Abstand zwischen den Boxen
-  const boxRadius = 6; // Corner Radius: 6px
-  const boxBorder = 15; // Even-Grün
+  const margin = 20; 
+  const gap = 16; 
+  const boxRadius = 6; 
+  const boxBorder = 15; 
   const boxBorderWidth = 2;
 
-  // Berechnung der Box-Breiten
-  const boxWidth = (576 - (margin * 2) - gap) / 2; // (576 - 40 - 16) / 2 = 260px pro Box
-  const xLeft = margin; // 20
-  const xRight = margin + boxWidth + gap; // 296
+  const boxWidth = (576 - (margin * 2) - gap) / 2; 
+  const xLeft = margin; 
+  const xRight = margin + boxWidth + gap; 
   
   const headerY = 16;
   const boxesY = 60;
   const boxesHeight = 180;
 
-  // 1. Header Container
   const header = new TextContainerProperty({
     containerID: 1, 
     containerName: "header",
@@ -83,11 +117,10 @@ async function startGlassesUI(bridge: any, names: string, date: string) {
     yPosition: headerY, 
     width: 536, 
     height: 30,
-    content: `${names}  •  Seit: ${stats.formattedDate}`,
+    content: `${names}  •  Since: ${stats.formattedDate}`,
     borderColor: 0,
   });
 
-  // 2. Linke Box (Genaue Zeit)
   const boxLeft = new TextContainerProperty({
     containerID: 2, 
     containerName: "boxLeft",
@@ -95,14 +128,13 @@ async function startGlassesUI(bridge: any, names: string, date: string) {
     yPosition: boxesY, 
     width: boxWidth, 
     height: boxesHeight,
-    content: stats.leftBoxString, // Hier ist das simulierte Padding drin
+    content: stats.leftBoxString, 
     borderColor: boxBorder, 
     borderWidth: boxBorderWidth, 
-    borderRdaius: boxRadius, // Bewusster Typo aus dem SDK
-    isEventCapture: 1 // Verhindert Simulator-Warnungen bei Klicks
+    borderRdaius: boxRadius, 
+    isEventCapture: 1 
   });
 
-  // 3. Rechte Box (Meilensteine)
   const boxRight = new TextContainerProperty({
     containerID: 3, 
     containerName: "boxRight",
@@ -110,13 +142,12 @@ async function startGlassesUI(bridge: any, names: string, date: string) {
     yPosition: boxesY, 
     width: boxWidth, 
     height: boxesHeight,
-    content: stats.rightBoxString, // Hier ist das simulierte Padding drin
+    content: stats.rightBoxString, 
     borderColor: boxBorder, 
     borderWidth: boxBorderWidth, 
     borderRdaius: boxRadius,
   });
 
-  // Seite generieren und senden
   const page = new CreateStartUpPageContainer({
     containerTotalNum: 3,
     textObject: [header, boxLeft, boxRight]
@@ -124,11 +155,9 @@ async function startGlassesUI(bridge: any, names: string, date: string) {
 
   try {
     await bridge.createStartUpPageContainer(page);
-    console.log("Erfolgreich an G2 / Simulator gesendet!");
   } catch (error) {
     console.error("Fehler beim Senden:", error);
   }
 }
 
-// App starten
 initApp().catch(console.error);

@@ -2,6 +2,13 @@ export interface LoveStats {
     formattedDate: string;
     leftBoxString: string;
     rightBoxString: string;
+    years: number;
+    months: number;
+    days: number;
+    totalMonths: number;
+    totalWeeks: number;
+    totalDays: number;
+    totalHours: number;
     isValid: boolean;
 }
 
@@ -12,8 +19,10 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
     if (isNaN(start.getTime())) {
         return { 
             formattedDate: "", 
-            leftBoxString: "\n  Bitte Datum\n  wählen", 
+            leftBoxString: "\n  Please select\n  a date", 
             rightBoxString: "\n  -", 
+            years: 0, months: 0, days: 0,
+            totalMonths: 0, totalWeeks: 0, totalDays: 0, totalHours: 0,
             isValid: false 
         };
     }
@@ -36,27 +45,29 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
     // Summen berechnen
     const diffMs = now.getTime() - start.getTime();
     const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
     const totalWeeks = Math.floor(totalDays / 7);
     const totalMonths = (years * 12) + months;
 
-    // Datumsformat (z.B. 18. Sep 2023)
-    const formattedDate = start.toLocaleDateString('de-DE', { 
+    // Englisches Datumsformat
+    const formattedDate = start.toLocaleDateString('en-US', { 
         day: 'numeric', month: 'short', year: 'numeric' 
     });
 
-    // Pluralisierung
-    const yStr = years === 1 ? 'Jahr' : 'Jahre';
-    const mStr = months === 1 ? 'Monat' : 'Monate';
-    const dStr = days === 1 ? 'Tag' : 'Tage';
+    const yStr = years === 1 ? 'Year' : 'Years';
+    const mStr = months === 1 ? 'Month' : 'Months';
+    const dStr = days === 1 ? 'Day' : 'Days';
 
-    // Formatierung mit Padding-Trick (\n für Abstand oben, Doppel-Leerzeichen für Abstand links)
-    const leftBoxString = `\n  Genaue Zeit:\n\n  ${years} ${yStr}, ${months} ${mStr}\n  und ${days} ${dStr}`;
-    const rightBoxString = `\n  Meilensteine:\n\n  ${totalMonths.toLocaleString('de-DE')} Monate\n  ${totalWeeks.toLocaleString('de-DE')} Wochen\n  ${totalDays.toLocaleString('de-DE')} Tage`;
+    // String-Generierung für die Brille (mit Padding-Trick)
+    const leftBoxString = `\n  Exact Time:\n\n  ${years} ${yStr}, ${months} ${mStr}\n  and ${days} ${dStr}`;
+    const rightBoxString = `\n  Milestones:\n\n  ${totalMonths.toLocaleString('en-US')} Months\n  ${totalWeeks.toLocaleString('en-US')} Weeks\n  ${totalDays.toLocaleString('en-US')} Days`;
 
     return {
         formattedDate,
         leftBoxString,
         rightBoxString,
+        years, months, days,
+        totalMonths, totalWeeks, totalDays, totalHours,
         isValid: true
     };
 }
