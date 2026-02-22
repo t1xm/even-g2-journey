@@ -1,7 +1,7 @@
 export interface LoveStats {
     formattedDate: string;
-    leftBoxString: string;
-    rightBoxString: string;
+    exactString: string;
+    milestonesString: string;
     years: number;
     months: number;
     days: number;
@@ -18,16 +18,15 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
     
     if (isNaN(start.getTime())) {
         return { 
-            formattedDate: "", 
-            leftBoxString: "\n  Please select\n  a date", 
-            rightBoxString: "\n  -", 
+            formattedDate: "Please select a date", 
+            exactString: "-", 
+            milestonesString: "-", 
             years: 0, months: 0, days: 0,
             totalMonths: 0, totalWeeks: 0, totalDays: 0, totalHours: 0,
             isValid: false 
         };
     }
 
-    // Exakte Werte berechnen
     let years = now.getFullYear() - start.getFullYear();
     let months = now.getMonth() - start.getMonth();
     let days = now.getDate() - start.getDate();
@@ -42,30 +41,29 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
         months += 12;
     }
 
-    // Summen berechnen
     const diffMs = now.getTime() - start.getTime();
     const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
     const totalWeeks = Math.floor(totalDays / 7);
     const totalMonths = (years * 12) + months;
 
-    // Englisches Datumsformat
     const formattedDate = start.toLocaleDateString('en-US', { 
         day: 'numeric', month: 'short', year: 'numeric' 
     });
 
+    // Wieder das Original: Wunderschön ausgeschrieben für die Handy-App!
     const yStr = years === 1 ? 'Year' : 'Years';
     const mStr = months === 1 ? 'Month' : 'Months';
     const dStr = days === 1 ? 'Day' : 'Days';
-
-    // String-Generierung für die Brille (mit Padding-Trick)
-    const leftBoxString = `\n  Exact Time:\n\n  ${years} ${yStr}, ${months} ${mStr}\n  and ${days} ${dStr}`;
-    const rightBoxString = `\n  Milestones:\n\n  ${totalMonths.toLocaleString('en-US')} Months\n  ${totalWeeks.toLocaleString('en-US')} Weeks\n  ${totalDays.toLocaleString('en-US')} Days`;
+    const exactString = `${years} ${yStr}, ${months} ${mStr} and ${days} ${dStr}`;
+    
+    // Original Milestones String für das Handy
+    const milestonesString = `${totalMonths.toLocaleString('en-US')} Mo  •  ${totalWeeks.toLocaleString('en-US')} Wk  •  ${totalDays.toLocaleString('en-US')} Dy`;
 
     return {
         formattedDate,
-        leftBoxString,
-        rightBoxString,
+        exactString,
+        milestonesString,
         years, months, days,
         totalMonths, totalWeeks, totalDays, totalHours,
         isValid: true

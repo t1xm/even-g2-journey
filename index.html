@@ -5,134 +5,134 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Together G2</title>
 
-  <style>
+<style>
 
-    body {
-      background-color: #EEEEEE;
-      color: #232323;
-      font-family: sans-serif;
-    }
+  body {
+    background-color: #EEEEEE;
+    color: #232323;
+    font-family: sans-serif;
+  }
 
-    h1 {
-      font-size: 24px;
-      font-weight: 400;
-      margin: 0px;
-    }
+  h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0px;
+  }
 
-    .subtitle {
-      font-size: 13px;
-      font-weight: 400;
-      margin: 16px 0px 8px 0px;
-    }
+  .subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    margin: 16px 0px 8px 0px;
+  }
 
-    p {
-      color: #232323;
-      font-size: 15px;
-      font-weight: 300;
-      margin: 0px;
-    }
+  p {
+    color: #232323;
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0px;
+  }
 
-    .p {
-      margin: 0px 0px 8px 0px;
-    }
+  .p {
+    margin: 0px 0px 8px 0px;
+  }
 
-    .card {
-      background-color: #FFFFFF;
-      border-radius: 6px;
-      padding: 16px;
-    }
+  .card {
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    padding: 16px;
+  }
 
-    img {
-      width: 20px;
-      height: auto;
-    }
+  img {
+    width: 20px;
+    height: auto;
+  }
 
-    .info-card {
-      background-color: #FFFFFF;
-      border-radius: 6px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+  .info-card {
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-    .detail .card {
-      flex: 1;
-      text-align: center;
-    }
+  .detail .card {
+    flex: 1;
+    text-align: center;
+  }
 
-    .detail {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-    }
+  .detail {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
 
-    .layout {
-          display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+  .layout {
+        display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-    input {
-      width: 100%; 
-      box-sizing: border-box;
-      background-color: rgba(35, 35, 35, 0.08);
-      outline: none;
-      border: none;
-      border-radius: 5px;
-      padding: 12px;
-    }
+  input {
+    width: 100%; 
+    box-sizing: border-box;
+    background-color: rgba(35, 35, 35, 0.08);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+  }
 
-    input::-webkit-calendar-picker-indicator {
-      display: none;
-      -webkit-appearance: none;
-    }
+  input::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
 
-    input, button, select, textarea {
-      font-family: inherit;
-      font-size: inherit;
-      color: inherit;
-    }
+  input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
 
-    .divider-small {
-      height: 8px;
-    }
+  .divider-small {
+    height: 8px;
+  }
 
-    .divider {
-      height: 16px;
-    }
+  .divider {
+    height: 16px;
+  }
 
-    button {
-      width: 100%;
-      background-color: #FEF991;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-    }
+  button {
+    width: 100%;
+    background-color: #FEF991;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+  }
 
-    #status {
-      position: fixed;
-      bottom: 32px; 
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background-color: #FEF991;
-      padding: 8px 16px;
-      border-radius: 6px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-      opacity: 0;
-      pointer-events: none;
-      width: 80%;
-      text-align: center;
-    }
+  #status {
+    position: fixed;
+    bottom: 32px; 
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: #FEF991;
+    padding: 8px 16px;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    width: 80%;
+    text-align: center;
+  }
 
-    #status.visible {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+  #status.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
 
-  </style>
+</style>
 
 </head>
 <body>
