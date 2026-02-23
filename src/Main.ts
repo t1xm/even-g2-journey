@@ -1,7 +1,9 @@
+// src/main.ts
+
 import { waitForEvenAppBridge } from '@evenrealities/even_hub_sdk';
 import { loadSettings, saveSettings } from './storage';
-import { startGlassesUI, rebuildGlassesUI } from './glasses-ui';
-import { WebUI } from './web-ui';
+import { startGlassesUI, rebuildGlassesUI } from './ui-hud';
+import { WebUI } from './ui-app';
 
 async function initApp() {
     // 1. Initialize dependencies

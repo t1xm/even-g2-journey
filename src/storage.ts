@@ -1,3 +1,5 @@
+// src/sorage.ts
+
 export interface AppSettings {
     names: string;
     date: string;

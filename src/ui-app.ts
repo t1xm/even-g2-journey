@@ -1,4 +1,6 @@
-import { calculateLoveStats } from './logic';
+// src/ui-app.ts
+
+import { calculateLoveStats } from './calc';
 
 export class WebUI {
     private namesInput = document.getElementById('names-input') as HTMLInputElement;

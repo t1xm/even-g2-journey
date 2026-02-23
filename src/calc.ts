@@ -1,3 +1,5 @@
+// src/calc.ts
+
 export interface LoveStats {
     formattedDate: string;
     exactString: string;

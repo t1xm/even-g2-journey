@@ -1,8 +1,10 @@
+// src/ui-hud.ts
+
 import { 
   CreateStartUpPageContainer, 
   TextContainerProperty
 } from '@evenrealities/even_hub_sdk';
-import { calculateLoveStats } from './logic';
+import { calculateLoveStats } from './calc';
 
 function getGlassesPageConfig(names: string, date: string) {
     const stats = calculateLoveStats(date);
@@ -30,7 +32,7 @@ function getGlassesPageConfig(names: string, date: string) {
         isEventCapture: 1,
     });
 
-    const safeExact = `${stats.years} Years, ${stats.months} Months and ${stats.days} Days`;
+    const safeExact = `${stats.years} Years, ${stats.months} Months and ${stats.days} Days ago`;
 
     const boxMain = new TextContainerProperty({
         containerID: 2,
@@ -55,7 +57,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: 0,
         width: halfWidth,
         height: 88,
-        content: `${stats.totalMonths.toLocaleString('en-US')} Months\n\n${stats.totalDays.toLocaleString('en-US')} Days ago`, 
+        content: `${stats.totalMonths.toLocaleString('en-US')} Months\n\n${stats.totalDays.toLocaleString('en-US')} Days`, 
         borderColor: 0,
         borderWidth: 0,
         borderRdaius: 0,
