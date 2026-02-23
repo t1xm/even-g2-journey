@@ -7,6 +7,28 @@ import {
 import { calculateLoveStats } from './calc';
 
 function getGlassesPageConfig(names: string, date: string) {
+    if (!names || !date) {
+        const emptyContainer = new TextContainerProperty({
+            containerID: 1,
+            containerName: "emptyState",
+            xPosition: 14,
+            yPosition: 14,
+            paddingLength: 14,
+            width: 548,
+            height: 260,
+            content: "Welcome to Together!\n\nPlease open the Even app on your phone and enter your names and anniversary date in the settings to get started.",
+            borderColor: 8,
+            borderWidth: 1,
+            borderRdaius: 6,
+            isEventCapture: 1,
+        });
+
+        return {
+            containerTotalNum: 1,
+            textObject: [emptyContainer]
+        };
+    }
+
     const stats = calculateLoveStats(date);
     if (!stats.isValid) return null;
 

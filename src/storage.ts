@@ -18,8 +18,8 @@ export async function loadSettings(bridge: any): Promise<AppSettings> {
     if (!savedDate) savedDate = window.localStorage.getItem(STORAGE_KEYS.DATE);
 
     return {
-        names: savedNames || "Lilli & Tim",
-        date: savedDate || "2023-09-18"
+        names: savedNames || "",
+        date: savedDate || ""
     };
 }
 

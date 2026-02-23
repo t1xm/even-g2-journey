@@ -22,11 +22,11 @@ export class WebUI {
     }
 
     public updateDashboard(names: string, dateStr: string) {
-        if (this.uiNames) this.uiNames.textContent = names || "Lilli & Tim";
+        if (this.uiNames) this.uiNames.textContent = names || "Set your names";
         
         const stats = calculateLoveStats(dateStr);
 
-        if (!stats.isValid) {
+        if (!stats.isValid || !dateStr) {
             this.setEmptyDashboard();
             return;
         }
@@ -42,10 +42,10 @@ export class WebUI {
     private setEmptyDashboard() {
         if (this.uiDate) this.uiDate.textContent = "Please select a date";
         if (this.uiExact) this.uiExact.textContent = "-";
-        if (this.uiMonths) this.uiMonths.textContent = "-";
-        if (this.uiWeeks) this.uiWeeks.textContent = "-";
-        if (this.uiDays) this.uiDays.textContent = "-";
-        if (this.uiHours) this.uiHours.textContent = "-";
+        if (this.uiMonths) this.uiMonths.textContent = "- Months";
+        if (this.uiWeeks) this.uiWeeks.textContent = "- Weeks";
+        if (this.uiDays) this.uiDays.textContent = "- Days";
+        if (this.uiHours) this.uiHours.textContent = "- Hours";
     }
 
     public showStatus(message: string, duration: number = 3000): void {
