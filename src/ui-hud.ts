@@ -54,7 +54,7 @@ function getGlassesPageConfig(names: string, date: string) {
         isEventCapture: 1,
     });
 
-    const safeExact = `${stats.years} Years, ${stats.months} Months and ${stats.days} Days ago`;
+    const safeExact = `${stats.years} Years, ${stats.months} Months and ${stats.days} Days`;
 
     const boxMain = new TextContainerProperty({
         containerID: 2,
