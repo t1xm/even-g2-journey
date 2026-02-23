@@ -140,7 +140,7 @@ function getGlassesPageConfig(names: string, date: string) {
     paddingLength: 0,
     width: halfWidth,
     height: 88,
-    content: `${stats.totalMonths.toLocaleString('en-US')} Months\n\n${stats.totalDays.toLocaleString('en-US')} Days`, 
+    content: `${stats.totalMonths.toLocaleString('en-US')} Months\n\n${stats.totalDays.toLocaleString('en-US')} Days ago`, 
     borderColor: 0,
     borderWidth: 0,
     borderRdaius: 0,
