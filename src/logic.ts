@@ -36,6 +36,7 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
         const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
         days += prevMonth.getDate();
     }
+    
     if (months < 0) {
         years -= 1;
         months += 12;
@@ -51,13 +52,11 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
         day: 'numeric', month: 'short', year: 'numeric' 
     });
 
-    // Wieder das Original: Wunderschön ausgeschrieben für die Handy-App!
     const yStr = years === 1 ? 'Year' : 'Years';
     const mStr = months === 1 ? 'Month' : 'Months';
     const dStr = days === 1 ? 'Day' : 'Days';
     const exactString = `${years} ${yStr}, ${months} ${mStr} and ${days} ${dStr}`;
     
-    // Original Milestones String für das Handy
     const milestonesString = `${totalMonths.toLocaleString('en-US')} Mo  •  ${totalWeeks.toLocaleString('en-US')} Wk  •  ${totalDays.toLocaleString('en-US')} Dy`;
 
     return {
