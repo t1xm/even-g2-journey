@@ -92,57 +92,74 @@ function getGlassesPageConfig(names: string, date: string) {
   const stats = calculateLoveStats(date);
   if (!stats.isValid) return null;
 
-  const margin = 16; 
-  const fullWidth = 544; 
-  const gap = 12; 
-  const halfWidth = 266; 
+  const margin = 14;
+  const fullWidth = 544;
+  const halfWidth = 230;
 
-  const boxBorder = 8; 
-  const boxBorderWidth = 2; 
-  const boxRadius = 8; 
-  const pad = 14; 
+  const borderColor = 8;
+  const borderWidth = 1;
+  const borderRadius = 6;
 
-  // 1. HEADER (Höhe 60px - Von dir als perfekt bestätigt)
   const header = new TextContainerProperty({
-    containerID: 1, containerName: "header",
-    xPosition: margin, yPosition: 15, width: fullWidth, height: 60,
-    paddingLength: pad,
-    content: `TOGETHER   ♥   ${names}`,
-    borderColor: boxBorder, borderWidth: boxBorderWidth, borderRdaius: boxRadius, 
-    // Hier bleibt der Fokus, um Scrollbars in den Inhaltsboxen zu verhindern.
-    isEventCapture: 1 
+    containerID: 1, 
+    containerName: "header",
+    xPosition: margin,
+    yPosition: margin,
+    paddingLength: margin,
+    width: fullWidth,
+    height: 60,
+    content: `Together │ ${names}`,
+    borderColor: borderColor,
+    borderWidth: borderWidth,
+    borderRdaius: borderRadius,
+    isEventCapture: 1,
   });
 
-  const safeExact = `${stats.years} Years, ${stats.months} Months, ${stats.days} Days`;
+  const safeExact = `${stats.years} Years, ${stats.months} Months and ${stats.days} Days`;
 
-  // 2. MAIN INFO (Höhe auf 86px korrigiert für perfekte Zentrierung)
   const boxMain = new TextContainerProperty({
-    containerID: 2, containerName: "boxMain",
-    xPosition: margin, yPosition: 87, width: fullWidth, height: 86,
-    paddingLength: pad,
-    content: `Start: ${stats.formattedDate}\nTime:  ${safeExact}`, 
-    borderColor: boxBorder, borderWidth: boxBorderWidth, borderRdaius: boxRadius,
-    isEventCapture: 0
+    containerID: 2,
+    containerName: "boxMain",
+    xPosition: margin,
+    yPosition: 90,
+    paddingLength: margin,
+    width: fullWidth,
+    height: 88,
+    content: `Anniversary │ ${stats.formattedDate}\n                      │ ${safeExact}`,
+    borderColor: borderColor,
+    borderWidth: borderWidth,
+    borderRdaius: borderRadius,
+    isEventCapture: 0,
   });
 
-  // 3. DETAILS LINKS (Höhe auf 86px korrigiert)
   const boxLeft = new TextContainerProperty({
-    containerID: 3, containerName: "boxLeft",
-    xPosition: margin, yPosition: 185, width: halfWidth, height: 86,
-    paddingLength: pad,
-    content: `Months: ${stats.totalMonths.toLocaleString('en-US')}\nDays:   ${stats.totalDays.toLocaleString('en-US')}`, 
-    borderColor: boxBorder, borderWidth: boxBorderWidth, borderRdaius: boxRadius,
-    isEventCapture: 0
+    containerID: 3,
+    containerName: "boxLeft",
+    xPosition: margin + margin,
+    yPosition: 192,
+    paddingLength: 0,
+    width: halfWidth,
+    height: 88,
+    content: `${stats.totalMonths.toLocaleString('en-US')} Months\n\n${stats.totalDays.toLocaleString('en-US')} Days`, 
+    borderColor: 0,
+    borderWidth: 0,
+    borderRdaius: 0,
+    isEventCapture: 0,
   });
 
-  // 4. DETAILS RECHTS (Höhe auf 86px korrigiert)
   const boxRight = new TextContainerProperty({
-    containerID: 4, containerName: "boxRight",
-    xPosition: margin + halfWidth + gap, yPosition: 185, width: halfWidth, height: 86,
-    paddingLength: pad,
-    content: `Weeks: ${stats.totalWeeks.toLocaleString('en-US')}\nHours: ${stats.totalHours.toLocaleString('en-US')}`, 
-    borderColor: boxBorder, borderWidth: boxBorderWidth, borderRdaius: boxRadius,
-    isEventCapture: 0
+    containerID: 4,
+    containerName: "boxRight",
+    xPosition: margin * 3 + halfWidth,
+    yPosition: 192,
+    paddingLength: 0,
+    width: halfWidth,
+    height: 88,
+    content: `${stats.totalWeeks.toLocaleString('en-US')} Weeks\n\n${stats.totalHours.toLocaleString('en-US')} Hours`, 
+    borderColor: 0,
+    borderWidth: 0,
+    borderRdaius: 0,
+    isEventCapture: 0,
   });
 
   return {
