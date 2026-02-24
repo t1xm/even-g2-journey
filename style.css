@@ -1,84 +1,11 @@
-/* style.css */
-
 body {
   background-color: #EEEEEE;
   color: #232323;
   font-family: sans-serif;
 }
 
-img {
-  width: 20px;
-  height: auto;
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: 400;
-  margin: 0px;
-}
-
-.subtitle {
-  font-size: 13px;
-  font-weight: 400;
-  margin: 16px 0px 8px 0px;
-}
-
-p {
-  color: #232323;
-  font-size: 15px;
-  font-weight: 300;
-  margin: 0px;
-}
-
-.p {
-  margin: 0px 0px 8px 0px;
-}
-
-.card {
-  background-color: #FFFFFF;
-  border-radius: 6px;
-  padding: 16px;
-}
-
-.info-card {
-  background-color: #FFFFFF;
-  border-radius: 6px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.detail .card {
-  flex: 1;
-  text-align: center;
-}
-
-.detail {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-}
-
-.layout {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-input {
-  width: 100%; 
+*, *::before, *::after {
   box-sizing: border-box;
-  background-color: rgba(35, 35, 35, 0.08);
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  padding: 12px;
-}
-
-input::-webkit-calendar-picker-indicator {
-  display: none;
-  -webkit-appearance: none;
 }
 
 input, button, select, textarea {
@@ -87,23 +14,101 @@ input, button, select, textarea {
   color: inherit;
 }
 
-.divider-small {
-  height: 8px;
+.text-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
 }
 
-.divider {
-  height: 16px;
+.text-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 16px 0px 8px 0px;
 }
 
-button {
+.text-body {
+  font-size: 15px;
+  font-weight: 300;
+  margin: 0;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spacer-sm { height: 8px; }
+.spacer-md { height: 16px; }
+
+.card {
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.card--center {
+  text-align: center;
+}
+
+.card--icon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-grid {
+  display: flex;
+  gap: 8px;
   width: 100%;
-  background-color: #FEF991;
+}
+
+.card-grid .card {
+  flex: 1;
+}
+
+.icon {
+  width: 20px;
+  height: auto;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input-field {
+  width: 100%; 
+  background-color: rgba(35, 35, 35, 0.08);
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+}
+
+.input-field::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.btn {
+  width: 100%;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
-#status {
+.btn--primary {
+  background-color: #FEF991;
+}
+
+.toast {
   position: fixed;
   bottom: 32px; 
   left: 50%;
@@ -120,7 +125,7 @@ button {
   text-align: center;
 }
 
-#status.visible {
+.toast.visible {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }

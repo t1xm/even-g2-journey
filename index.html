@@ -8,65 +8,69 @@
 </head>
 
 <body>
-  <div>
-    <div class="layout">
-      <h1 data-i18n="appTitleSep"></h1>
-      <h1 id="ui-names"></h1>
-    </div>
+  <div class="app-container">
+    
+    <header class="header-row">
+      <h1 class="text-title" data-i18n="appTitleSep"></h1>
+      <h1 class="text-title" id="ui-names"></h1>
+    </header>
 
-    <p class="subtitle" data-i18n="anniversary"></p>
-    <div class="info-card">
+    <h2 class="text-subtitle" data-i18n="anniversary"></h2>
+    <div class="card card--icon">
       <img src="assets/ic-calendar.svg" alt="Calendar Icon" class="icon">
-      <p id="ui-date"></p>
+      <p class="text-body" id="ui-date"></p>
     </div>
     
-    <div class="divider-small"></div>
+    <div class="spacer-sm"></div>
     
-    <div class="info-card">
+    <div class="card card--icon">
       <img src="assets/ic-time.svg" alt="Clock Icon" class="icon">
-      <p id="ui-exact"></p>
+      <p class="text-body" id="ui-exact"></p>
     </div>
 
-    <p class="subtitle" data-i18n="inDetail"></p>
-    <div class="detail">
-      <div class="card">
-        <p id="ui-months"></p>
+    <h2 class="text-subtitle" data-i18n="inDetail"></h2>
+    <div class="card-grid">
+      <div class="card card--center">
+        <p class="text-body" id="ui-months"></p>
       </div>
-      <div class="card">
-        <p id="ui-weeks"></p>
+      <div class="card card--center">
+        <p class="text-body" id="ui-weeks"></p>
       </div>
     </div>
-    <div class="divider-small"></div>
-    <div class="detail">
-      <div class="card">
-        <p id="ui-days"></p>
+    
+    <div class="spacer-sm"></div>
+    
+    <div class="card-grid">
+      <div class="card card--center">
+        <p class="text-body" id="ui-days"></p>
       </div>
-      <div class="card">
-        <p id="ui-hours"></p>
+      <div class="card card--center">
+        <p class="text-body" id="ui-hours"></p>
       </div>
     </div>    
 
-    <p class="subtitle" data-i18n="settings"></p>
+    <h2 class="text-subtitle" data-i18n="settings"></h2>
     <div class="card">
-      <p class="p" data-i18n="namesLabel"></p>
-      <input type="text" id="names-input" data-i18n-placeholder="namesPlaceholder" placeholder="e.g. Lilli & Tim">
+      <label class="text-body form-label" data-i18n="namesLabel"></label>
+      <input type="text" class="input-field" id="names-input" data-i18n-placeholder="namesPlaceholder" placeholder="e.g. Lilli & Tim">
 
-      <div class="divider"></div>
+      <div class="spacer-md"></div>
 
-      <p class="p" data-i18n="anniversaryLabel"></p>
-      <input type="date" id="date-input">
+      <label class="text-body form-label" data-i18n="anniversaryLabel"></label>
+      <input type="date" class="input-field" id="date-input">
     </div>
 
-    <div class="divider-small"></div>
+    <div class="spacer-sm"></div>
 
-    <button id="save-btn" data-i18n="saveBtn"></button>
+    <button class="btn btn--primary" id="save-btn" data-i18n="saveBtn"></button>
 
-    <p class="subtitle" data-i18n="aboutTitle"></p>
+    <h2 class="text-subtitle" data-i18n="aboutTitle"></h2>
     <div class="card">
-      <p data-i18n="aboutText"></p>
+      <p class="text-body" data-i18n="aboutText"></p>
     </div>
 
-    <div id="status"></div>
+    <div class="toast" id="status"></div>
+    
   </div>
 
   <script type="module" src="/src/main.ts"></script>
