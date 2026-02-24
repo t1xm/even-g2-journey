@@ -5,6 +5,7 @@ import {
   TextContainerProperty
 } from '@evenrealities/even_hub_sdk';
 import { calculateLoveStats } from './calc';
+import { t } from './i18n';
 
 function getGlassesPageConfig(names: string, date: string) {
     if (!names || !date) {
@@ -16,7 +17,7 @@ function getGlassesPageConfig(names: string, date: string) {
             paddingLength: 14,
             width: 548,
             height: 260,
-            content: "Welcome to Together!\n\nPlease open the Even app on your phone and enter your names and anniversary date in the settings to get started.",
+            content: `${t('welcomeTitle')}\n\n${t('welcomeDesc')}`,
             borderColor: 8,
             borderWidth: 1,
             borderRdaius: 6,
@@ -33,8 +34,8 @@ function getGlassesPageConfig(names: string, date: string) {
     if (!stats.isValid) return null;
 
     const margin = 14;
-    const fullWidth = 544;
-    const halfWidth = 230;
+    const fullWidth = 548;
+    const halfWidth = 232;
     const borderColor = 8;
     const borderWidth = 1;
     const borderRadius = 6;
@@ -47,14 +48,12 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: margin,
         width: fullWidth,
         height: 60,
-        content: `Together │ ${names}`,
+        content: `${t('appTitleSep')} ${names}`,
         borderColor: borderColor,
         borderWidth: borderWidth,
         borderRdaius: borderRadius,
         isEventCapture: 1,
     });
-
-    const safeExact = `${stats.years} Years, ${stats.months} Months and ${stats.days} Days`;
 
     const boxMain = new TextContainerProperty({
         containerID: 2,
@@ -64,7 +63,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: margin,
         width: fullWidth,
         height: 88,
-        content: `Anniversary │ ${stats.formattedDate}\n                      │ ${safeExact}`,
+        content: `${t('anniversarySep')} ${stats.formattedDate}\n                      │ ${stats.exactString}`,
         borderColor: borderColor,
         borderWidth: borderWidth,
         borderRdaius: borderRadius,
@@ -79,7 +78,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: 0,
         width: halfWidth,
         height: 88,
-        content: `${stats.totalMonths.toLocaleString('en-US')} Months\n\n${stats.totalDays.toLocaleString('en-US')} Days`, 
+        content: `${stats.totalMonths.toLocaleString('en-US')} ${t('months')}\n\n${stats.totalDays.toLocaleString('en-US')} ${t('days')}`, 
         borderColor: 0,
         borderWidth: 0,
         borderRdaius: 0,
@@ -94,7 +93,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: 0,
         width: halfWidth,
         height: 88,
-        content: `${stats.totalWeeks.toLocaleString('en-US')} Weeks\n\n${stats.totalHours.toLocaleString('en-US')} Hours`, 
+        content: `${stats.totalWeeks.toLocaleString('en-US')} ${t('weeks')}\n\n${stats.totalHours.toLocaleString('en-US')} ${t('hours')}`, 
         borderColor: 0,
         borderWidth: 0,
         borderRdaius: 0,

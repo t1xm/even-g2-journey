@@ -1,6 +1,7 @@
 // src/ui-app.ts
 
 import { calculateLoveStats } from './calc';
+import { t, translations } from './i18n';
 
 export class WebUI {
     private namesInput = document.getElementById('names-input') as HTMLInputElement;
@@ -16,13 +17,29 @@ export class WebUI {
     private uiDays = document.getElementById('ui-days') as HTMLParagraphElement;
     private uiHours = document.getElementById('ui-hours') as HTMLParagraphElement;
 
+    constructor() {
+        this.applyTranslations();
+    }
+
+    private applyTranslations() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n') as keyof typeof translations['en'];
+            if (key) el.textContent = t(key);
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder') as keyof typeof translations['en'];
+            if (key) (el as HTMLInputElement).placeholder = t(key);
+        });
+    }
+
     public initInputs(names: string, date: string) {
         this.namesInput.value = names;
         this.dateInput.value = date;
     }
 
     public updateDashboard(names: string, dateStr: string) {
-        if (this.uiNames) this.uiNames.textContent = names || "Set your names";
+        if (this.uiNames) this.uiNames.textContent = names || t('setNames');
         
         const stats = calculateLoveStats(dateStr);
 
@@ -33,19 +50,20 @@ export class WebUI {
 
         if (this.uiDate) this.uiDate.textContent = stats.formattedDate;
         if (this.uiExact) this.uiExact.textContent = stats.exactString;
-        if (this.uiMonths) this.uiMonths.textContent = `${stats.totalMonths.toLocaleString('en-US')} Months`;
-        if (this.uiWeeks) this.uiWeeks.textContent = `${stats.totalWeeks.toLocaleString('en-US')} Weeks`;
-        if (this.uiDays) this.uiDays.textContent = `${stats.totalDays.toLocaleString('en-US')} Days`;
-        if (this.uiHours) this.uiHours.textContent = `${stats.totalHours.toLocaleString('en-US')} Hours`;
+        if (this.uiMonths) this.uiMonths.textContent = `${stats.totalMonths.toLocaleString('en-US')} ${t('months')}`;
+        if (this.uiWeeks) this.uiWeeks.textContent = `${stats.totalWeeks.toLocaleString('en-US')} ${t('weeks')}`;
+        if (this.uiDays) this.uiDays.textContent = `${stats.totalDays.toLocaleString('en-US')} ${t('days')}`;
+        if (this.uiHours) this.uiHours.textContent = `${stats.totalHours.toLocaleString('en-US')} ${t('hours')}`;
     }
 
     private setEmptyDashboard() {
-        if (this.uiDate) this.uiDate.textContent = "Please select a date";
-        if (this.uiExact) this.uiExact.textContent = "-";
-        if (this.uiMonths) this.uiMonths.textContent = "- Months";
-        if (this.uiWeeks) this.uiWeeks.textContent = "- Weeks";
-        if (this.uiDays) this.uiDays.textContent = "- Days";
-        if (this.uiHours) this.uiHours.textContent = "- Hours";
+        const emptyMarker = t('emptyStateMarker');
+        if (this.uiDate) this.uiDate.textContent = t('pleaseSelectDate');
+        if (this.uiExact) this.uiExact.textContent = emptyMarker;
+        if (this.uiMonths) this.uiMonths.textContent = `${emptyMarker} ${t('months')}`;
+        if (this.uiWeeks) this.uiWeeks.textContent = `${emptyMarker} ${t('weeks')}`;
+        if (this.uiDays) this.uiDays.textContent = `${emptyMarker} ${t('days')}`;
+        if (this.uiHours) this.uiHours.textContent = `${emptyMarker} ${t('hours')}`;
     }
 
     public showStatus(message: string, duration: number = 3000): void {

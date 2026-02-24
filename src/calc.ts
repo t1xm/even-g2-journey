@@ -1,9 +1,10 @@
 // src/calc.ts
 
+import { t } from './i18n';
+
 export interface LoveStats {
     formattedDate: string;
     exactString: string;
-    milestonesString: string;
     years: number;
     months: number;
     days: number;
@@ -20,9 +21,8 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
     
     if (isNaN(start.getTime())) {
         return { 
-            formattedDate: "Please select a date", 
-            exactString: "-", 
-            milestonesString: "-", 
+            formattedDate: t('pleaseSelectDate'), 
+            exactString: t('emptyStateMarker'), 
             years: 0, months: 0, days: 0,
             totalMonths: 0, totalWeeks: 0, totalDays: 0, totalHours: 0,
             isValid: false 
@@ -54,17 +54,14 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
         day: 'numeric', month: 'short', year: 'numeric' 
     });
 
-    const yStr = years === 1 ? 'Year' : 'Years';
-    const mStr = months === 1 ? 'Month' : 'Months';
-    const dStr = days === 1 ? 'Day' : 'Days';
-    const exactString = `${years} ${yStr}, ${months} ${mStr} and ${days} ${dStr}`;
+    const yStr = years === 1 ? t('year') : t('years');
+    const mStr = months === 1 ? t('month') : t('months');
+    const dStr = days === 1 ? t('day') : t('days');
+    const exactString = `${years} ${yStr}, ${months} ${mStr} ${t('and')} ${days} ${dStr}`;
     
-    const milestonesString = `${totalMonths.toLocaleString('en-US')} Mo  •  ${totalWeeks.toLocaleString('en-US')} Wk  •  ${totalDays.toLocaleString('en-US')} Dy`;
-
     return {
         formattedDate,
         exactString,
-        milestonesString,
         years, months, days,
         totalMonths, totalWeeks, totalDays, totalHours,
         isValid: true

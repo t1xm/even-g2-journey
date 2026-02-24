@@ -4,11 +4,12 @@ import { waitForEvenAppBridge } from '@evenrealities/even_hub_sdk';
 import { loadSettings, saveSettings } from './storage';
 import { startGlassesUI, rebuildGlassesUI } from './ui-hud';
 import { WebUI } from './ui-app';
+import { t } from './i18n';
 
 async function initApp() {
     // 1. Initialize dependencies
     const bridge = await waitForEvenAppBridge();
-    const ui = new WebUI();
+    const ui = new WebUI(); // wendet intern direkt die Translations an
 
     // 2. Load settings and populate UI
     const settings = await loadSettings(bridge);
@@ -21,7 +22,7 @@ async function initApp() {
     // 4. Handle user interactions
     ui.onSave(async (names, date) => {
         if (!names || !date) {
-            ui.showStatus('Please fill in both fields');
+            ui.showStatus(t('fillBothFields'));
             return;
         }
 
@@ -32,7 +33,7 @@ async function initApp() {
         ui.updateDashboard(names, date);
         await rebuildGlassesUI(bridge, names, date);
         
-        ui.showStatus('Saved & sent to G2');
+        ui.showStatus(t('savedAndSent'));
     });
 }
 
