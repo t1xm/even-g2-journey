@@ -1,6 +1,6 @@
 // src/calc.ts
 
-import { t } from './i18n';
+import { t, getLocale } from './i18n';
 
 export interface LoveStats {
     formattedDate: string;
@@ -50,7 +50,7 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
     const totalWeeks = Math.floor(totalDays / 7);
     const totalMonths = (years * 12) + months;
 
-    const formattedDate = start.toLocaleDateString('en-US', { 
+    const formattedDate = start.toLocaleDateString(getLocale(), { 
         day: 'numeric', month: 'short', year: 'numeric' 
     });
 

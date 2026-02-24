@@ -1,7 +1,7 @@
 // src/ui-app.ts
 
 import { calculateLoveStats } from './calc';
-import { t, translations } from './i18n';
+import { t, translations, getLocale } from './i18n';
 
 export class WebUI {
     private namesInput = document.getElementById('names-input') as HTMLInputElement;
@@ -48,12 +48,14 @@ export class WebUI {
             return;
         }
 
+        const locale = getLocale();
+
         if (this.uiDate) this.uiDate.textContent = stats.formattedDate;
         if (this.uiExact) this.uiExact.textContent = stats.exactString;
-        if (this.uiMonths) this.uiMonths.textContent = `${stats.totalMonths.toLocaleString('en-US')} ${t('months')}`;
-        if (this.uiWeeks) this.uiWeeks.textContent = `${stats.totalWeeks.toLocaleString('en-US')} ${t('weeks')}`;
-        if (this.uiDays) this.uiDays.textContent = `${stats.totalDays.toLocaleString('en-US')} ${t('days')}`;
-        if (this.uiHours) this.uiHours.textContent = `${stats.totalHours.toLocaleString('en-US')} ${t('hours')}`;
+        if (this.uiMonths) this.uiMonths.textContent = `${stats.totalMonths.toLocaleString(locale)} ${t('months')}`;
+        if (this.uiWeeks) this.uiWeeks.textContent = `${stats.totalWeeks.toLocaleString(locale)} ${t('weeks')}`;
+        if (this.uiDays) this.uiDays.textContent = `${stats.totalDays.toLocaleString(locale)} ${t('days')}`;
+        if (this.uiHours) this.uiHours.textContent = `${stats.totalHours.toLocaleString(locale)} ${t('hours')}`;
     }
 
     private setEmptyDashboard() {

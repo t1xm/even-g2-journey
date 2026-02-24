@@ -5,7 +5,7 @@ import {
   TextContainerProperty
 } from '@evenrealities/even_hub_sdk';
 import { calculateLoveStats } from './calc';
-import { t } from './i18n';
+import { t, getLocale } from './i18n';
 
 function getGlassesPageConfig(names: string, date: string) {
     if (!names || !date) {
@@ -33,12 +33,15 @@ function getGlassesPageConfig(names: string, date: string) {
     const stats = calculateLoveStats(date);
     if (!stats.isValid) return null;
 
+    const locale = getLocale();
     const margin = 14;
     const fullWidth = 548;
     const halfWidth = 232;
     const borderColor = 8;
     const borderWidth = 1;
     const borderRadius = 6;
+
+    const indentSpaces = t('anniversaryIndent');
 
     const header = new TextContainerProperty({
         containerID: 1, 
@@ -63,7 +66,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: margin,
         width: fullWidth,
         height: 88,
-        content: `${t('anniversarySep')} ${stats.formattedDate}\n                      │ ${stats.exactString}`,
+        content: `${t('anniversarySep')} ${stats.formattedDate}\n${indentSpaces}│ ${stats.exactString}`,
         borderColor: borderColor,
         borderWidth: borderWidth,
         borderRdaius: borderRadius,
@@ -78,7 +81,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: 0,
         width: halfWidth,
         height: 88,
-        content: `${stats.totalMonths.toLocaleString('en-US')} ${t('months')}\n\n${stats.totalDays.toLocaleString('en-US')} ${t('days')}`, 
+        content: `${stats.totalMonths.toLocaleString(locale)} ${t('months')}\n\n${stats.totalDays.toLocaleString(locale)} ${t('days')}`, 
         borderColor: 0,
         borderWidth: 0,
         borderRdaius: 0,
@@ -93,7 +96,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: 0,
         width: halfWidth,
         height: 88,
-        content: `${stats.totalWeeks.toLocaleString('en-US')} ${t('weeks')}\n\n${stats.totalHours.toLocaleString('en-US')} ${t('hours')}`, 
+        content: `${stats.totalWeeks.toLocaleString(locale)} ${t('weeks')}\n\n${stats.totalHours.toLocaleString(locale)} ${t('hours')}`, 
         borderColor: 0,
         borderWidth: 0,
         borderRdaius: 0,
