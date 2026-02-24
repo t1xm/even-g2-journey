@@ -50,12 +50,17 @@ export class WebUI {
 
         const locale = getLocale();
 
+        const mStr = stats.totalMonths === 1 ? t('month') : t('months');
+        const wStr = stats.totalWeeks === 1 ? t('week') : t('weeks');
+        const dStr = stats.totalDays === 1 ? t('day') : t('days');
+        const hStr = stats.totalHours === 1 ? t('hour') : t('hours');
+
         if (this.uiDate) this.uiDate.textContent = stats.formattedDate;
         if (this.uiExact) this.uiExact.textContent = stats.exactString;
-        if (this.uiMonths) this.uiMonths.textContent = `${stats.totalMonths.toLocaleString(locale)} ${t('months')}`;
-        if (this.uiWeeks) this.uiWeeks.textContent = `${stats.totalWeeks.toLocaleString(locale)} ${t('weeks')}`;
-        if (this.uiDays) this.uiDays.textContent = `${stats.totalDays.toLocaleString(locale)} ${t('days')}`;
-        if (this.uiHours) this.uiHours.textContent = `${stats.totalHours.toLocaleString(locale)} ${t('hours')}`;
+        if (this.uiMonths) this.uiMonths.textContent = `${stats.totalMonths.toLocaleString(locale)} ${mStr}`;
+        if (this.uiWeeks) this.uiWeeks.textContent = `${stats.totalWeeks.toLocaleString(locale)} ${wStr}`;
+        if (this.uiDays) this.uiDays.textContent = `${stats.totalDays.toLocaleString(locale)} ${dStr}`;
+        if (this.uiHours) this.uiHours.textContent = `${stats.totalHours.toLocaleString(locale)} ${hStr}`;
     }
 
     private setEmptyDashboard() {

@@ -43,6 +43,11 @@ function getGlassesPageConfig(names: string, date: string) {
 
     const indentSpaces = t('anniversaryIndent');
 
+    const mStr = stats.totalMonths === 1 ? t('month') : t('months');
+    const wStr = stats.totalWeeks === 1 ? t('week') : t('weeks');
+    const dStr = stats.totalDays === 1 ? t('day') : t('days');
+    const hStr = stats.totalHours === 1 ? t('hour') : t('hours');
+
     const header = new TextContainerProperty({
         containerID: 1, 
         containerName: "header",
@@ -81,7 +86,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: 0,
         width: halfWidth,
         height: 88,
-        content: `${stats.totalMonths.toLocaleString(locale)} ${t('months')}\n\n${stats.totalDays.toLocaleString(locale)} ${t('days')}`, 
+        content: `${stats.totalMonths.toLocaleString(locale)} ${mStr}\n\n${stats.totalDays.toLocaleString(locale)} ${dStr}`, 
         borderColor: 0,
         borderWidth: 0,
         borderRdaius: 0,
@@ -96,7 +101,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: 0,
         width: halfWidth,
         height: 88,
-        content: `${stats.totalWeeks.toLocaleString(locale)} ${t('weeks')}\n\n${stats.totalHours.toLocaleString(locale)} ${t('hours')}`, 
+        content: `${stats.totalWeeks.toLocaleString(locale)} ${wStr}\n\n${stats.totalHours.toLocaleString(locale)} ${hStr}`, 
         borderColor: 0,
         borderWidth: 0,
         borderRdaius: 0,

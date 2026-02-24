@@ -51,7 +51,7 @@ export function calculateLoveStats(startDateStr: string): LoveStats {
     const totalMonths = (years * 12) + months;
 
     const formattedDate = start.toLocaleDateString(getLocale(), { 
-        day: 'numeric', month: 'short', year: 'numeric' 
+        day: 'numeric', month: 'long', year: 'numeric' 
     });
 
     const yStr = years === 1 ? t('year') : t('years');
