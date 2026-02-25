@@ -2,6 +2,9 @@
 
 **Together** is a minimalist relationship tracker for Even Realities G2. Displays time spent with your partner in different formats on the glasses HUD. A glanceable way to celebrate milestones. 💚
 
+<img width="578" height="360" alt="t1xm-even-together-hud" src="https://github.com/user-attachments/assets/026c1b48-2a6d-41f8-8858-5ebb7ceced7a" />
+<img width="407" height="832" alt="t1xm-even-together-app" src="https://github.com/user-attachments/assets/e6db1373-79d5-4d48-9fee-9c67bfba7f3d" />
+
 ## ✨ Features
 
 - **Glanceable HUD Dashboard:** Shows your names, anniversary date, and detailed time-spent statistics (years, months, weeks, days, hours).
