@@ -1,6 +1,8 @@
 {
   "package_id": "com.t1xm.even.together",
+  "name": "Together",
   "version": "1.0.0",
+  "description": "A minimalist relationship and anniversary tracker for Even Realities G2.",
   "entrypoint": "index.html",
   "permissions": {
     "network": ["*"]
