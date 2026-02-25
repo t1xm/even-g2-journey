@@ -60,3 +60,5 @@ The UI leverages the absolute maximum of **4 containers** per page, which is the
 - **Lifecycle:** Uses `createStartUpPageContainer` for the initial render and `rebuildPageContainer` for flicker-free (sequential) updates when settings are changed.
 - **Data Persistence:** Uses the `bridge.getLocalStorage` and `bridge.setLocalStorage` APIs to ensure the anniversary date persists across app restarts.
 - **i18n:** A custom translation layer maps system locales to app strings before sending content to the glasses, ensuring the 1000-character limit for `TextContainerProperty` is never exceeded.
+
+Created with ❤️ by Tim (@t1xm)
