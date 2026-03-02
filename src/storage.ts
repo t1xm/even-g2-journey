@@ -1,32 +1,109 @@
 // src/sorage.ts
 
-export interface AppSettings {
-    names: string;
+export interface Journey {
+    id: string;
+    title: string;
     date: string;
 }
 
+export interface JourneySettings {
+    journeys: Journey[];
+    activeJourneyId: string | null;
+}
+
 const STORAGE_KEYS = {
-    NAMES: 'together_names',
-    DATE: 'together_date',
+    LEGACY_NAMES: 'together_names',
+    LEGACY_DATE: 'together_date',
+    JOURNEYS: 'journey_data',
 } as const;
 
-export async function loadSettings(bridge: any): Promise<AppSettings> {
-    let savedNames: string | null = await bridge.getLocalStorage(STORAGE_KEYS.NAMES);
-    let savedDate: string | null = await bridge.getLocalStorage(STORAGE_KEYS.DATE);
+function parseJourneySettings(raw: string | null): JourneySettings | null {
+    if (!raw) return null;
+    try {
+        const parsed = JSON.parse(raw) as JourneySettings;
+        if (!Array.isArray(parsed.journeys)) return null;
+        return {
+            journeys: parsed.journeys.map(j => ({
+                id: j.id,
+                title: j.title ?? '',
+                date: j.date ?? '',
+            })).filter(j => !!j.id),
+            activeJourneyId: parsed.activeJourneyId ?? null,
+        };
+    } catch {
+        return null;
+    }
+}
 
-    if (!savedNames) savedNames = window.localStorage.getItem(STORAGE_KEYS.NAMES);
-    if (!savedDate) savedDate = window.localStorage.getItem(STORAGE_KEYS.DATE);
-
+function createDefaultSettings(): JourneySettings {
     return {
-        names: savedNames || "",
-        date: savedDate || ""
+        journeys: [],
+        activeJourneyId: null,
     };
 }
 
-export async function saveSettings(bridge: any, names: string, date: string): Promise<void> {
-    await bridge.setLocalStorage(STORAGE_KEYS.NAMES, names);
-    await bridge.setLocalStorage(STORAGE_KEYS.DATE, date);
-    
-    window.localStorage.setItem(STORAGE_KEYS.NAMES, names);
-    window.localStorage.setItem(STORAGE_KEYS.DATE, date);
+export async function loadSettings(bridge: any): Promise<JourneySettings> {
+    // 1) Try new Journey format from bridge storage
+    const storedJourneys = await bridge.getLocalStorage(STORAGE_KEYS.JOURNEYS);
+    let settings = parseJourneySettings(storedJourneys);
+
+    // 2) Fallback: localStorage (browser)
+    if (!settings) {
+        const localJourneys = window.localStorage.getItem(STORAGE_KEYS.JOURNEYS);
+        settings = parseJourneySettings(localJourneys);
+    }
+
+    // 3) Legacy migration from Together single entry
+    if (!settings) {
+        let legacyNames: string | null = await bridge.getLocalStorage(STORAGE_KEYS.LEGACY_NAMES);
+        let legacyDate: string | null = await bridge.getLocalStorage(STORAGE_KEYS.LEGACY_DATE);
+
+        if (!legacyNames) legacyNames = window.localStorage.getItem(STORAGE_KEYS.LEGACY_NAMES);
+        if (!legacyDate) legacyDate = window.localStorage.getItem(STORAGE_KEYS.LEGACY_DATE);
+
+        const hasLegacy = !!(legacyNames || legacyDate);
+        if (hasLegacy) {
+            const id = `j-${Date.now().toString(36)}`;
+            const title = legacyNames && legacyNames.trim().length > 0 ? legacyNames : 'Together';
+            settings = {
+                journeys: [{
+                    id,
+                    title,
+                    date: legacyDate || '',
+                }],
+                activeJourneyId: id,
+            };
+        }
+    }
+
+    if (!settings) {
+        settings = createDefaultSettings();
+    }
+
+    // Ensure activeJourneyId is valid
+    if (settings.journeys.length > 0) {
+        const exists = settings.journeys.some(j => j.id === settings!.activeJourneyId);
+        if (!exists) {
+            settings.activeJourneyId = settings.journeys[0].id;
+        }
+    } else {
+        settings.activeJourneyId = null;
+    }
+
+    // Persist migrated data in new format
+    await saveSettings(bridge, settings);
+
+    return settings;
+}
+
+export async function saveSettings(bridge: any, settings: JourneySettings): Promise<void> {
+    const payload: JourneySettings = {
+        journeys: settings.journeys,
+        activeJourneyId: settings.activeJourneyId,
+    };
+
+    const json = JSON.stringify(payload);
+
+    await bridge.setLocalStorage(STORAGE_KEYS.JOURNEYS, json);
+    window.localStorage.setItem(STORAGE_KEYS.JOURNEYS, json);
 }

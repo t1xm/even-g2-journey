@@ -2,7 +2,7 @@
 
 import { t, getLocale } from './i18n';
 
-export interface LoveStats {
+export interface JourneyStats {
     formattedDate: string;
     exactString: string;
     years: number;
@@ -15,7 +15,7 @@ export interface LoveStats {
     isValid: boolean;
 }
 
-export function calculateLoveStats(startDateStr: string): LoveStats {
+export function calculateJourneyStats(startDateStr: string): JourneyStats {
     const start = new Date(startDateStr);
     const now = new Date();
     

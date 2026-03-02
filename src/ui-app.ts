@@ -1,10 +1,11 @@
 // src/ui-app.ts
 
-import { calculateLoveStats } from './calc';
+import { calculateJourneyStats } from './calc';
 import { t, translations, getLocale } from './i18n';
+import type { Journey } from './storage';
 
 export class WebUI {
-    private namesInput = document.getElementById('names-input') as HTMLInputElement;
+    private titleInput = document.getElementById('names-input') as HTMLInputElement;
     private dateInput = document.getElementById('date-input') as HTMLInputElement;
     private saveBtn = document.getElementById('save-btn') as HTMLButtonElement;
     private statusEl = document.getElementById('status') as HTMLDivElement;
@@ -16,6 +17,13 @@ export class WebUI {
     private uiWeeks = document.getElementById('ui-weeks') as HTMLParagraphElement;
     private uiDays = document.getElementById('ui-days') as HTMLParagraphElement;
     private uiHours = document.getElementById('ui-hours') as HTMLParagraphElement;
+
+    private journeyList = document.getElementById('journey-list') as HTMLDivElement;
+    private addJourneyBtn = document.getElementById('add-journey-btn') as HTMLButtonElement;
+
+    private onSelectJourney?: (id: string) => void;
+    private onCreateJourney?: () => void;
+    private onDeleteJourney?: (id: string) => void;
 
     constructor() {
         this.applyTranslations();
@@ -33,15 +41,15 @@ export class WebUI {
         });
     }
 
-    public initInputs(names: string, date: string) {
-        this.namesInput.value = names;
+    public initInputs(title: string, date: string) {
+        this.titleInput.value = title;
         this.dateInput.value = date;
     }
 
-    public updateDashboard(names: string, dateStr: string) {
-        if (this.uiNames) this.uiNames.textContent = names || t('setNames');
+    public updateDashboard(title: string, dateStr: string) {
+        if (this.uiNames) this.uiNames.textContent = title || t('setTitle');
         
-        const stats = calculateLoveStats(dateStr);
+        const stats = calculateJourneyStats(dateStr);
 
         if (!stats.isValid || !dateStr) {
             this.setEmptyDashboard();
@@ -63,6 +71,92 @@ export class WebUI {
         if (this.uiHours) this.uiHours.textContent = `${stats.totalHours.toLocaleString(locale)} ${hStr}`;
     }
 
+    public renderJourneys(journeys: Journey[], activeJourneyId: string | null) {
+        if (!this.journeyList) return;
+
+        this.journeyList.innerHTML = '';
+
+        if (journeys.length === 0) {
+            const emptyEl = document.createElement('p');
+            emptyEl.className = 'text-body';
+            emptyEl.textContent = t('emptyStateMarker');
+            this.journeyList.appendChild(emptyEl);
+            return;
+        }
+
+        journeys.forEach(journey => {
+            const isActive = journey.id === activeJourneyId;
+            const title = journey.title && journey.title.trim().length > 0
+                ? journey.title
+                : t('untitledJourney');
+
+            const row = document.createElement('div');
+            row.style.display = 'flex';
+            row.style.alignItems = 'center';
+            row.style.justifyContent = 'space-between';
+            row.style.marginBottom = '12px';
+
+            const left = document.createElement('button');
+            left.type = 'button';
+            left.style.display = 'flex';
+            left.style.alignItems = 'center';
+            left.style.gap = '12px';
+            left.style.border = 'none';
+            left.style.background = 'transparent';
+            left.style.padding = '0';
+            left.style.cursor = 'pointer';
+
+            const boxIcon = document.createElement('img');
+            boxIcon.src = isActive ? 'assets/ic-box-selected.svg' : 'assets/ic-box.svg';
+            boxIcon.alt = isActive ? 'Selected' : 'Not selected';
+            boxIcon.style.width = '20px';
+            boxIcon.style.height = '20px';
+
+            const textWrapper = document.createElement('div');
+            textWrapper.style.display = 'flex';
+            textWrapper.style.flexDirection = 'column';
+            textWrapper.style.alignItems = 'flex-start';
+
+            const titleEl = document.createElement('p');
+            titleEl.className = 'text-body';
+            titleEl.style.margin = '0';
+            titleEl.textContent = title;
+
+            textWrapper.appendChild(titleEl);
+
+            left.appendChild(boxIcon);
+            left.appendChild(textWrapper);
+
+            left.addEventListener('click', () => {
+                this.onSelectJourney?.(journey.id);
+            });
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.type = 'button';
+            deleteBtn.style.border = 'none';
+            deleteBtn.style.background = 'transparent';
+            deleteBtn.style.padding = '0';
+            deleteBtn.style.cursor = 'pointer';
+
+            const trashIcon = document.createElement('img');
+            trashIcon.src = 'assets/ic-trash.svg';
+            trashIcon.alt = t('deleteJourney');
+            trashIcon.style.width = '20px';
+            trashIcon.style.height = '20px';
+
+            deleteBtn.appendChild(trashIcon);
+            deleteBtn.addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                this.onDeleteJourney?.(journey.id);
+            });
+
+            row.appendChild(left);
+            row.appendChild(deleteBtn);
+
+            this.journeyList.appendChild(row);
+        });
+    }
+
     private setEmptyDashboard() {
         const emptyMarker = t('emptyStateMarker');
         if (this.uiDate) this.uiDate.textContent = t('pleaseSelectDate');
@@ -82,9 +176,24 @@ export class WebUI {
 
     public onSave(callback: (names: string, date: string) => void) {
         this.saveBtn?.addEventListener('click', () => {
-            const names = this.namesInput.value.trim();
+            const names = this.titleInput.value.trim();
             const date = this.dateInput.value;
             callback(names, date);
         });
+    }
+
+    public onJourneySelect(callback: (id: string) => void) {
+        this.onSelectJourney = callback;
+    }
+
+    public onJourneyCreate(callback: () => void) {
+        this.onCreateJourney = callback;
+        this.addJourneyBtn?.addEventListener('click', () => {
+            this.onCreateJourney?.();
+        });
+    }
+
+    public onJourneyDelete(callback: (id: string) => void) {
+        this.onDeleteJourney = callback;
     }
 }

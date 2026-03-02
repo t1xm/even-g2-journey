@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Together G2</title>
+  <title>Journey G2</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -15,7 +15,17 @@
       <h1 class="text-title" id="ui-names"></h1>
     </header>
 
-    <h2 class="text-subtitle" data-i18n="anniversary"></h2>
+    
+    <h2 class="text-subtitle" data-i18n="journeyListTitle"></h2>
+    <div class="card card--list">
+      <div id="journey-list"></div>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <button class="btn btn--primary" id="add-journey-btn" data-i18n="newJourney"></button>
+
+    <h2 class="text-subtitle" data-i18n="sinceTitle"></h2>
     <div class="card card--icon">
       <img src="assets/ic-calendar.svg" alt="Calendar Icon" class="icon">
       <p class="text-body" id="ui-date"></p>
@@ -51,12 +61,12 @@
 
     <h2 class="text-subtitle" data-i18n="settings"></h2>
     <div class="card">
-      <label class="text-body form-label" data-i18n="namesLabel"></label>
-      <input type="text" class="input-field" id="names-input" data-i18n-placeholder="namesPlaceholder" placeholder="e.g. Lilli & Tim">
+      <label class="text-body form-label" data-i18n="titleLabel"></label>
+      <input type="text" class="input-field" id="names-input" data-i18n-placeholder="titlePlaceholder" placeholder="e.g. Lilli & Tim">
 
       <div class="spacer-md"></div>
 
-      <label class="text-body form-label" data-i18n="anniversaryLabel"></label>
+      <label class="text-body form-label" data-i18n="sinceLabel"></label>
       <input type="date" class="input-field" id="date-input">
     </div>
 

@@ -4,11 +4,11 @@ import {
   CreateStartUpPageContainer, 
   TextContainerProperty
 } from '@evenrealities/even_hub_sdk';
-import { calculateLoveStats } from './calc';
+import { calculateJourneyStats } from './calc';
 import { t, getLocale } from './i18n';
 
-function getGlassesPageConfig(names: string, date: string) {
-    if (!names || !date) {
+function getGlassesPageConfig(title: string, date: string) {
+    if (!title || !date) {
         const emptyContainer = new TextContainerProperty({
             containerID: 1,
             containerName: "emptyState",
@@ -30,7 +30,7 @@ function getGlassesPageConfig(names: string, date: string) {
         };
     }
 
-    const stats = calculateLoveStats(date);
+    const stats = calculateJourneyStats(date);
     if (!stats.isValid) return null;
 
     const locale = getLocale();
@@ -40,8 +40,6 @@ function getGlassesPageConfig(names: string, date: string) {
     const borderColor = 8;
     const borderWidth = 1;
     const borderRadius = 6;
-
-    const indentSpaces = t('anniversaryIndent');
 
     const mStr = stats.totalMonths === 1 ? t('month') : t('months');
     const wStr = stats.totalWeeks === 1 ? t('week') : t('weeks');
@@ -56,7 +54,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: margin,
         width: fullWidth,
         height: 60,
-        content: `${t('appTitleSep')} ${names}`,
+        content: `${t('appTitleSep')} ${title}`,
         borderColor: borderColor,
         borderWidth: borderWidth,
         borderRdaius: borderRadius,
@@ -71,7 +69,7 @@ function getGlassesPageConfig(names: string, date: string) {
         paddingLength: margin,
         width: fullWidth,
         height: 88,
-        content: `${t('anniversarySep')} ${stats.formattedDate}\n${indentSpaces}│ ${stats.exactString}`,
+        content: `${t('sinceSep')} ${stats.formattedDate}\n${t('sinceIndent')}│ ${stats.exactString}`,
         borderColor: borderColor,
         borderWidth: borderWidth,
         borderRdaius: borderRadius,
@@ -114,8 +112,8 @@ function getGlassesPageConfig(names: string, date: string) {
     };
 }
 
-export async function startGlassesUI(bridge: any, names: string, date: string) {
-    const config = getGlassesPageConfig(names, date);
+export async function startGlassesUI(bridge: any, title: string, date: string) {
+    const config = getGlassesPageConfig(title, date);
     if (!config) return;
 
     const page = new CreateStartUpPageContainer(config);
@@ -128,8 +126,8 @@ export async function startGlassesUI(bridge: any, names: string, date: string) {
     }
 }
 
-export async function rebuildGlassesUI(bridge: any, names: string, date: string) {
-    const config = getGlassesPageConfig(names, date);
+export async function rebuildGlassesUI(bridge: any, title: string, date: string) {
+    const config = getGlassesPageConfig(title, date);
     if (!config) return;
 
     try {

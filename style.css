@@ -56,6 +56,10 @@ input, button, select, textarea {
   text-align: center;
 }
 
+.card--list {
+  padding-bottom: 4px;
+}
+
 .card--icon {
   display: flex;
   align-items: center;
