@@ -145,10 +145,43 @@ export class WebUI {
             trashIcon.style.height = '20px';
 
             deleteBtn.appendChild(trashIcon);
-            deleteBtn.addEventListener('click', (ev) => {
+
+            let pressTimer: number;
+            let isLongPress = false;
+
+            const startPress = (ev: Event) => {
                 ev.stopPropagation();
-                this.onDeleteJourney?.(journey.id);
-            });
+                isLongPress = false;
+                
+                pressTimer = window.setTimeout(() => {
+                    isLongPress = true;
+                    this.onDeleteJourney?.(journey.id);
+                }, 800);
+            };
+
+            const endPress = (ev: Event) => {
+                ev.stopPropagation();
+                clearTimeout(pressTimer);
+                
+                if (!isLongPress) {
+                    const errMsg = (t as any)('holdToDelete') || 'Gedrückt halten zum Löschen';
+                    this.showStatus(errMsg, 3000, true);
+                }
+            };
+
+            const cancelPress = (ev: Event) => {
+                ev.stopPropagation();
+                clearTimeout(pressTimer);
+            };
+
+            deleteBtn.addEventListener('touchstart', startPress, { passive: true });
+            deleteBtn.addEventListener('touchend', endPress);
+            deleteBtn.addEventListener('touchcancel', cancelPress);
+            deleteBtn.addEventListener('touchmove', cancelPress, { passive: true });
+
+            deleteBtn.addEventListener('mousedown', startPress);
+            deleteBtn.addEventListener('mouseup', endPress);
+            deleteBtn.addEventListener('mouseleave', cancelPress);
 
             row.appendChild(left);
             row.appendChild(deleteBtn);
@@ -167,9 +200,17 @@ export class WebUI {
         if (this.uiHours) this.uiHours.textContent = `${emptyMarker} ${t('hours')}`;
     }
 
-    public showStatus(message: string, duration: number = 3000): void {
+    public showStatus(message: string, duration: number = 3000, isError: boolean = false): void {
         if (!this.statusEl) return;
+        
         this.statusEl.textContent = message;
+        
+        if (isError) {
+            this.statusEl.classList.add('toast--error');
+        } else {
+            this.statusEl.classList.remove('toast--error');
+        }
+
         this.statusEl.classList.add('visible');
         setTimeout(() => this.statusEl.classList.remove('visible'), duration);
     }

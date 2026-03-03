@@ -7,9 +7,12 @@ export const translations = {
 
     journeyListTitle: "Your journeys",
     deleteJourney: "Delete",
+    holdToDelete: "Hold to delete",
     newJourney: "Add journey",
 
     sinceTitle: "Since",
+    pleaseSelectDate: "Select date",
+
     inDetail: "In detail",
     emptyStateMarker: "-",
     year: "Year", years: "Years",
@@ -26,7 +29,6 @@ export const translations = {
     sinceLabel: "Since",
 
     saveBtn: "Save & send to G2",
-    pleaseSelectDate: "Please select a date",
     fillBothFields: "Please fill in both fields",
     savedAndSent: "Saved & sent to G2",
 
@@ -42,9 +44,12 @@ export const translations = {
 
     journeyListTitle: "Deine Journeys",
     deleteJourney: "Löschen",
+    holdToDelete: "Zum Löschen gedrückt halten",
     newJourney: "Journey hinzufügen",
 
     sinceTitle: "Seit",
+    pleaseSelectDate: "Datum wählen",
+
     inDetail: "Im Detail",
     emptyStateMarker: "-",
     year: "Jahr", years: "Jahre",
@@ -61,7 +66,6 @@ export const translations = {
     sinceLabel: "Seit",
 
     saveBtn: "Speichern & an G2 senden",
-    pleaseSelectDate: "Bitte Datum wählen",
     fillBothFields: "Bitte beide Felder ausfüllen",
     savedAndSent: "Gespeichert & an G2 gesendet",
 
@@ -77,9 +81,12 @@ export const translations = {
 
     journeyListTitle: "Vos parcours",
     deleteJourney: "Supprimer",
+    holdToDelete: "Maintenez pour supprimer",
     newJourney: "Ajouter parcours",
 
     sinceTitle: "Depuis",
+    pleaseSelectDate: "Sélectionnez une date",
+
     inDetail: "En détail",
     emptyStateMarker: "-",
     year: "Année", years: "Années",
@@ -96,7 +103,6 @@ export const translations = {
     sinceLabel: "Depuis",
 
     saveBtn: "Enregistrer et envoyer aux G2",
-    pleaseSelectDate: "Veuillez choisir une date",
     fillBothFields: "Veuillez remplir les deux champs",
     savedAndSent: "Enregistré et envoyé aux G2",
 

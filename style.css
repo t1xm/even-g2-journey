@@ -161,3 +161,8 @@ input, button, select, textarea {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
+
+.toast--error {
+  background-color: #FF453A;
+  color: #FFFFFF;
+}
