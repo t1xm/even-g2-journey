@@ -62,8 +62,8 @@ async function initApp() {
     }
 
     // 4. Handle user interactions (web app)
-    ui.onSave(async (title, date) => {
-        if (!title || !date) {
+    ui.onSave(async (names, date) => {
+        if (!names || !date) {
             ui.showStatus(t('fillBothFields'));
             return;
         }
@@ -71,11 +71,11 @@ async function initApp() {
         // Create journey if none exists yet
         if (!activeJourneyId) {
             const id = `j-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-            const newJourney: Journey = { id, title, date };
+            const newJourney: Journey = { id, title: names, date };
             journeys = [newJourney];
             activeJourneyId = id;
         } else {
-            journeys = journeys.map(j => j.id === activeJourneyId ? { ...j, title, date } : j);
+            journeys = journeys.map(j => j.id === activeJourneyId ? { ...j, title: names, date } : j);
         }
 
         await syncSettings(true);
@@ -105,7 +105,7 @@ async function initApp() {
         await syncSettings(true);
     });
 
-    // 5. Handle glasses input events to rotate zwischen Journeys
+    // 5. Handle glasses input events to rotate between journeys
     bridge.onEvenHubEvent(async (event: any) => {
         if (!event || !event.textEvent) return;
         if (journeys.length <= 1) return;

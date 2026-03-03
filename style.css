@@ -106,10 +106,28 @@ input, button, select, textarea {
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn--primary {
   background-color: #FEF991;
+}
+
+.btn--secondary {
+  background-color: #232323;
+  color: #FFFFFF;
+}
+
+.icon--inline {
+  width: 18px;
+  height: 18px;
+}
+
+.btn--secondary .icon--inline {
+  filter: invert(1);
 }
 
 .toast {

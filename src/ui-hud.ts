@@ -12,10 +12,10 @@ function getGlassesPageConfig(title: string, date: string) {
         const emptyContainer = new TextContainerProperty({
             containerID: 1,
             containerName: "emptyState",
-            xPosition: 14,
+            xPosition: 64,
             yPosition: 14,
             paddingLength: 14,
-            width: 548,
+            width: 448,
             height: 260,
             content: `${t('welcomeTitle')}\n\n${t('welcomeDesc')}`,
             borderColor: 8,
@@ -35,8 +35,9 @@ function getGlassesPageConfig(title: string, date: string) {
 
     const locale = getLocale();
     const margin = 14;
-    const fullWidth = 548;
-    const halfWidth = 232;
+    const marginHorizontal = 64;
+    const fullWidth = 448;
+    const halfWidth = 196;
     const borderColor = 8;
     const borderWidth = 1;
     const borderRadius = 6;
@@ -49,7 +50,7 @@ function getGlassesPageConfig(title: string, date: string) {
     const header = new TextContainerProperty({
         containerID: 1, 
         containerName: "header",
-        xPosition: margin,
+        xPosition: marginHorizontal,
         yPosition: margin,
         paddingLength: margin,
         width: fullWidth,
@@ -64,12 +65,12 @@ function getGlassesPageConfig(title: string, date: string) {
     const boxMain = new TextContainerProperty({
         containerID: 2,
         containerName: "boxMain",
-        xPosition: margin,
+        xPosition: marginHorizontal,
         yPosition: 90,
         paddingLength: margin,
         width: fullWidth,
         height: 88,
-        content: `${t('sinceSep')} ${stats.formattedDate}\n${t('sinceIndent')}│ ${stats.exactString}`,
+        content: `${stats.formattedDate}\n${stats.exactString}`,
         borderColor: borderColor,
         borderWidth: borderWidth,
         borderRdaius: borderRadius,
@@ -79,7 +80,7 @@ function getGlassesPageConfig(title: string, date: string) {
     const boxLeft = new TextContainerProperty({
         containerID: 3,
         containerName: "boxLeft",
-        xPosition: margin + margin,
+        xPosition: marginHorizontal + margin,
         yPosition: 192,
         paddingLength: 0,
         width: halfWidth,
@@ -94,7 +95,7 @@ function getGlassesPageConfig(title: string, date: string) {
     const boxRight = new TextContainerProperty({
         containerID: 4,
         containerName: "boxRight",
-        xPosition: margin * 3 + halfWidth,
+        xPosition: marginHorizontal + margin * 3 + halfWidth,
         yPosition: 192,
         paddingLength: 0,
         width: halfWidth,

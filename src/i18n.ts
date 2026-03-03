@@ -5,8 +5,6 @@ export const translations = {
     appTitle: "Journey",
     appTitleSep: "Journey │",
     sinceTitle: "Since",
-    sinceIndent: "          ",
-    sinceSep: "Since │",
     inDetail: "In detail",
     settings: "Settings",
     aboutTitle: "About Journey",
@@ -26,19 +24,16 @@ export const translations = {
     and: "and",
     welcomeTitle: "Welcome to Journey!",
     welcomeDesc: "Please open the Even app on your phone to create your first journey with a title and start date.",
-    aboutText: "A minimalist journey tracker for Even Realities G2. Track new habits, health milestones, personal projects and more – and see your progress at a glance on the glasses HUD.",
+    aboutText: "A minimalist journey tracker for Even Realities G2. Track new habits, health milestones, personal projects and more - and see your progress at a glance on the glasses HUD.",
     emptyStateMarker: "-",
     journeyListTitle: "Your journeys",
     newJourney: "New journey",
     deleteJourney: "Delete",
-    untitledJourney: "Untitled journey"
   },
   de: {
     appTitle: "Journey",
     appTitleSep: "Journey │",
     sinceTitle: "Seit",
-    sinceIndent: "       ",
-    sinceSep: "Seit │",
     inDetail: "Im Detail",
     settings: "Einstellungen",
     aboutTitle: "Über Journey",
@@ -58,19 +53,16 @@ export const translations = {
     and: "und",
     welcomeTitle: "Willkommen bei Journey!",
     welcomeDesc: "Bitte öffne die Even App auf deinem Smartphone und lege deinen ersten Eintrag mit Titel und Startdatum an.",
-    aboutText: "Ein minimalistischer Journey‑Tracker für Even Realities G2. Tracke neue Gewohnheiten, Gesundheits‑Meilensteine, Projekte und mehr – und sieh deinen Fortschritt auf einen Blick im HUD der Brille.",
+    aboutText: "Ein minimalistischer Journey-Tracker für Even Realities G2. Tracke neue Gewohnheiten, Gesundheits-Meilensteine, Projekte und mehr - und sieh deinen Fortschritt auf einen Blick im HUD der Brille.",
     emptyStateMarker: "-",
     journeyListTitle: "Deine Journeys",
-    newJourney: "Neuer Eintrag",
+    newJourney: "Neues Journey hinzufügen",
     deleteJourney: "Löschen",
-    untitledJourney: "Ohne Titel"
   },
   fr: {
     appTitle: "Journey",
     appTitleSep: "Journey │",
     sinceTitle: "Depuis",
-    sinceIndent: "             ",
-    sinceSep: "Depuis │",
     inDetail: "En détail",
     settings: "Paramètres",
     aboutTitle: "À propos de Journey",
@@ -95,7 +87,6 @@ export const translations = {
     journeyListTitle: "Vos parcours",
     newJourney: "Nouveau parcours",
     deleteJourney: "Supprimer",
-    untitledJourney: "Sans titre"
   }
 };
 

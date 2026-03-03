@@ -88,7 +88,7 @@ export class WebUI {
             const isActive = journey.id === activeJourneyId;
             const title = journey.title && journey.title.trim().length > 0
                 ? journey.title
-                : t('untitledJourney');
+                : t('setTitle');
 
             const row = document.createElement('div');
             row.style.display = 'flex';
