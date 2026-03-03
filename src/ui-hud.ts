@@ -123,7 +123,7 @@ export async function startGlassesUI(bridge: any, title: string, date: string) {
         await bridge.createStartUpPageContainer(page);
         console.log("Successfully sent to G2!");
     } catch (error) {
-        console.error("Error starting Glasses UI:", error);
+        console.error("Error starting G2 UI:", error);
     }
 }
 
@@ -133,8 +133,8 @@ export async function rebuildGlassesUI(bridge: any, title: string, date: string)
 
     try {
         await bridge.rebuildPageContainer(config);
-        console.log("UI updated on the glasses!");
+        console.log("Successfully updated G2 UI!");
     } catch (error) {
-        console.error("Error rebuilding Glasses UI:", error);
+        console.error("Error rebuilding G2 UI:", error);
     }
 }

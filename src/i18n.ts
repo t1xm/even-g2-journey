@@ -4,89 +4,107 @@ export const translations = {
   en: {
     appTitle: "Journey",
     appTitleSep: "Journey │",
+
+    journeyListTitle: "Your journeys",
+    deleteJourney: "Delete",
+    newJourney: "Add journey",
+
     sinceTitle: "Since",
     inDetail: "In detail",
-    settings: "Settings",
-    aboutTitle: "About Journey",
-    titleLabel: "Title",
-    titlePlaceholder: "e.g. Alcohol free",
-    sinceLabel: "Since",
-    saveBtn: "Save & Send to G2",
-    setTitle: "Set a title",
-    pleaseSelectDate: "Please select a start date",
-    fillBothFields: "Please fill in both fields",
-    savedAndSent: "Saved & Sent to G2",
+    emptyStateMarker: "-",
     year: "Year", years: "Years",
     month: "Month", months: "Months",
     day: "Day", days: "Days",
     week: "Week", weeks: "Weeks",
     hour: "Hour", hours: "Hours",
     and: "and",
-    welcomeTitle: "Welcome to Journey!",
-    welcomeDesc: "Please open the Even app on your phone to create your first journey with a title and start date.",
+
+    settings: "Settings",
+    setTitle: "Set a title",
+    titleLabel: "Title",
+    titlePlaceholder: "e.g. Lilli & Tim",
+    sinceLabel: "Since",
+
+    saveBtn: "Save & send to G2",
+    pleaseSelectDate: "Please select a date",
+    fillBothFields: "Please fill in both fields",
+    savedAndSent: "Saved & sent to G2",
+
+    aboutTitle: "About Journey",
     aboutText: "A minimalist journey tracker for Even Realities G2. Track new habits, health milestones, personal projects and more - and see your progress at a glance on the glasses HUD.",
-    emptyStateMarker: "-",
-    journeyListTitle: "Your journeys",
-    newJourney: "New journey",
-    deleteJourney: "Delete",
+    
+    welcomeTitle: "Welcome to Journey!",
+    welcomeDesc: "Please open the Even app on your smartphone and create your first entry with a title and start date.",
   },
   de: {
     appTitle: "Journey",
     appTitleSep: "Journey │",
+
+    journeyListTitle: "Deine Journeys",
+    deleteJourney: "Löschen",
+    newJourney: "Journey hinzufügen",
+
     sinceTitle: "Seit",
     inDetail: "Im Detail",
-    settings: "Einstellungen",
-    aboutTitle: "Über Journey",
-    titleLabel: "Titel",
-    titlePlaceholder: "z.B. Alkoholfrei",
-    sinceLabel: "Seit",
-    saveBtn: "Speichern & an G2 senden",
-    setTitle: "Titel festlegen",
-    pleaseSelectDate: "Bitte Startdatum wählen",
-    fillBothFields: "Bitte beide Felder ausfüllen",
-    savedAndSent: "Gespeichert & an G2 gesendet",
+    emptyStateMarker: "-",
     year: "Jahr", years: "Jahre",
     month: "Monat", months: "Monate",
     day: "Tag", days: "Tage",
     week: "Woche", weeks: "Wochen",
     hour: "Stunde", hours: "Stunden",
     and: "und",
+
+    settings: "Einstellungen",
+    setTitle: "Titel festlegen",
+    titleLabel: "Titel",
+    titlePlaceholder: "z.B. Lilli & Tim",
+    sinceLabel: "Seit",
+
+    saveBtn: "Speichern & an G2 senden",
+    pleaseSelectDate: "Bitte Datum wählen",
+    fillBothFields: "Bitte beide Felder ausfüllen",
+    savedAndSent: "Gespeichert & an G2 gesendet",
+
+    aboutTitle: "Über Journey",
+    aboutText: "Ein minimalistischer Journey-Tracker für Even Realities G2. Tracke neue Gewohnheiten, Gesundheits-Meilensteine, Projekte und mehr - und sieh deinen Fortschritt auf einen Blick im HUD der Brille.",
+    
     welcomeTitle: "Willkommen bei Journey!",
     welcomeDesc: "Bitte öffne die Even App auf deinem Smartphone und lege deinen ersten Eintrag mit Titel und Startdatum an.",
-    aboutText: "Ein minimalistischer Journey-Tracker für Even Realities G2. Tracke neue Gewohnheiten, Gesundheits-Meilensteine, Projekte und mehr - und sieh deinen Fortschritt auf einen Blick im HUD der Brille.",
-    emptyStateMarker: "-",
-    journeyListTitle: "Deine Journeys",
-    newJourney: "Neues Journey hinzufügen",
-    deleteJourney: "Löschen",
   },
   fr: {
     appTitle: "Journey",
     appTitleSep: "Journey │",
+
+    journeyListTitle: "Vos parcours",
+    deleteJourney: "Supprimer",
+    newJourney: "Ajouter parcours",
+
     sinceTitle: "Depuis",
     inDetail: "En détail",
-    settings: "Paramètres",
-    aboutTitle: "À propos de Journey",
-    titleLabel: "Titre",
-    titlePlaceholder: "ex. Sans alcool",
-    sinceLabel: "Depuis",
-    saveBtn: "Enregistrer et envoyer aux G2",
-    setTitle: "Définissez un titre",
-    pleaseSelectDate: "Veuillez choisir une date de début",
-    fillBothFields: "Veuillez remplir les deux champs",
-    savedAndSent: "Enregistré et envoyé aux G2",
+    emptyStateMarker: "-",
     year: "Année", years: "Années",
     month: "Mois", months: "Mois",
     day: "Jour", days: "Jours",
     week: "Semaine", weeks: "Semaines",
     hour: "Heure", hours: "Heures",
     and: "et",
+
+    settings: "Paramètres",
+    setTitle: "Définissez un titre",
+    titleLabel: "Titre",
+    titlePlaceholder: "ex. Lilli & Tim",
+    sinceLabel: "Depuis",
+
+    saveBtn: "Enregistrer et envoyer aux G2",
+    pleaseSelectDate: "Veuillez choisir une date",
+    fillBothFields: "Veuillez remplir les deux champs",
+    savedAndSent: "Enregistré et envoyé aux G2",
+
+    aboutTitle: "À propos de Journey",
+    aboutText: "Un suivi minimaliste de vos parcours pour Even Realities G2. Suivez vos nouvelles habitudes, jalons de santé, projets personnels et plus encore - et visualisez vos progrès d'un coup d'œil sur le HUD des lunettes.",
+    
     welcomeTitle: "Bienvenue sur Journey !",
-    welcomeDesc: "Veuillez ouvrir l'application Even sur votre téléphone pour créer votre premier parcours avec un titre et une date de début.",
-    aboutText: "Un suivi minimaliste de vos \"journeys\" pour Even Realities G2. Suivez vos nouvelles habitudes, jalons de santé, projets personnels et visualisez vos progrès sur le HUD des lunettes.",
-    emptyStateMarker: "-",
-    journeyListTitle: "Vos parcours",
-    newJourney: "Nouveau parcours",
-    deleteJourney: "Supprimer",
+    welcomeDesc: "Veuillez ouvrir l'application Even sur votre smartphone et créer votre première entrée avec un titre et une date de début.",
   }
 };
 
@@ -100,7 +118,7 @@ function detectSystemLanguage(): LanguageCode {
   return 'en'; 
 }
 
-// Debug: let currentLang: LanguageCode = 'fr';
+// Debug: let currentLang: LanguageCode = 'de';
 let currentLang: LanguageCode = detectSystemLanguage();
 
 export function t(key: keyof typeof translations['en']): string {

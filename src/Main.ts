@@ -9,7 +9,7 @@ import { t } from './i18n';
 async function initApp() {
     // 1. Initialize dependencies
     const bridge = await waitForEvenAppBridge();
-    const ui = new WebUI(); // wendet intern direkt die Translations an
+    const ui = new WebUI();
 
     let settings: JourneySettings = await loadSettings(bridge);
     let journeys: Journey[] = settings.journeys;

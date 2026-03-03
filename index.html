@@ -1,8 +1,10 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>Journey G2</title>
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -15,7 +17,6 @@
       <h1 class="text-title" id="ui-names"></h1>
     </header>
 
-    
     <h2 class="text-subtitle" data-i18n="journeyListTitle"></h2>
     <div class="card card--list">
       <div id="journey-list"></div>
@@ -64,12 +65,12 @@
 
     <h2 class="text-subtitle" data-i18n="settings"></h2>
     <div class="card">
-      <label class="text-body form-label" data-i18n="titleLabel"></label>
+      <label class="text-body form-label" data-i18n="titleLabel" for="names-input"></label>
       <input type="text" class="input-field" id="names-input" data-i18n-placeholder="titlePlaceholder" placeholder="e.g. Lilli & Tim">
 
       <div class="spacer-md"></div>
 
-      <label class="text-body form-label" data-i18n="sinceLabel"></label>
+      <label class="text-body form-label" data-i18n="sinceLabel" for="date-input"></label>
       <input type="date" class="input-field" id="date-input">
     </div>
 

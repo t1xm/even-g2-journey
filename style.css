@@ -1,11 +1,21 @@
-body {
-  background-color: #EEEEEE;
-  color: #232323;
-  font-family: sans-serif;
+/* style.css */
+
+:root {
+  --color-bg: #EEEEEE;
+  --color-text: #232323;
+  --color-card: #FFFFFF;
+  --color-primary: #FEF991;
+  --color-input-bg: rgba(35, 35, 35, 0.08);
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: sans-serif;
 }
 
 input, button, select, textarea {
@@ -47,7 +57,7 @@ input, button, select, textarea {
 .spacer-md { height: 16px; }
 
 .card {
-  background-color: #FFFFFF;
+  background-color: var(--color-card);
   border-radius: 6px;
   padding: 16px;
 }
@@ -81,6 +91,11 @@ input, button, select, textarea {
   height: auto;
 }
 
+.icon--inline {
+  width: 18px;
+  height: 18px;
+}
+
 .form-label {
   display: block;
   margin-bottom: 8px;
@@ -88,7 +103,7 @@ input, button, select, textarea {
 
 .input-field {
   width: 100%; 
-  background-color: rgba(35, 35, 35, 0.08);
+  background-color: var(--color-input-bg);
   outline: none;
   border: none;
   border-radius: 5px;
@@ -113,17 +128,12 @@ input, button, select, textarea {
 }
 
 .btn--primary {
-  background-color: #FEF991;
+  background-color: var(--color-primary);
 }
 
 .btn--secondary {
-  background-color: #232323;
-  color: #FFFFFF;
-}
-
-.icon--inline {
-  width: 18px;
-  height: 18px;
+  background-color: var(--color-text);
+  color: var(--color-card);
 }
 
 .btn--secondary .icon--inline {
@@ -135,7 +145,7 @@ input, button, select, textarea {
   bottom: 32px; 
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background-color: #FEF991;
+  background-color: var(--color-primary);
   padding: 8px 16px;
   border-radius: 6px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
