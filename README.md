@@ -1,4 +1,4 @@
-# Journey -- Even G2 Milestone Tracker
+# Journey - Even G2 Milestone Tracker
 **A minimalist journey tracker for Even Realities G2. Track new habits, health milestones, personal projects and more - and see your progress at a glance on the glasses HUD.** 💚
 
 <img width="1011" height="971" alt="image" src="https://github.com/user-attachments/assets/07eff60b-3079-4a80-a214-2c2402f190a2" />
