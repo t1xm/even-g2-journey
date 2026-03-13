@@ -35,9 +35,9 @@ function getGlassesPageConfig(title: string, date: string) {
 
     const locale = getLocale();
     const margin = 14;
-    const marginHorizontal = 64;
-    const fullWidth = 448;
-    const halfWidth = 196;
+    const marginHorizontal = 96;
+    const fullWidth = 384;
+    const halfWidth = 185;
     const borderColor = 8;
     const borderWidth = 1;
     const borderRadius = 6;
@@ -70,7 +70,7 @@ function getGlassesPageConfig(title: string, date: string) {
         paddingLength: margin,
         width: fullWidth,
         height: 88,
-        content: `${stats.formattedDate}\n${stats.exactString}`,
+        content: `${stats.formattedDate}\n→ ${stats.exactString}`,
         borderColor: borderColor,
         borderWidth: borderWidth,
         borderRdaius: borderRadius,
@@ -95,10 +95,10 @@ function getGlassesPageConfig(title: string, date: string) {
     const boxRight = new TextContainerProperty({
         containerID: 4,
         containerName: "boxRight",
-        xPosition: marginHorizontal + margin * 3 + halfWidth,
+        xPosition: marginHorizontal + margin * 2 + halfWidth,
         yPosition: 192,
         paddingLength: 0,
-        width: halfWidth,
+        width: halfWidth - margin,
         height: 88,
         content: `${stats.totalWeeks.toLocaleString(locale)} ${wStr}\n\n${stats.totalHours.toLocaleString(locale)} ${hStr}`, 
         borderColor: 0,

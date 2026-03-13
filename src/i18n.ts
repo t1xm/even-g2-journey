@@ -124,8 +124,8 @@ function detectSystemLanguage(): LanguageCode {
   return 'en'; 
 }
 
-let currentLang: LanguageCode = 'en';
-// let currentLang: LanguageCode = detectSystemLanguage();
+// let currentLang: LanguageCode = 'de';
+let currentLang: LanguageCode = detectSystemLanguage();
 
 export function t(key: keyof typeof translations['en']): string {
   return translations[currentLang][key] || key;
